@@ -1,0 +1,255 @@
+/* Hero scene and fan slots. Card transforms live in projects.css. */
+
+app-hero,
+app-projects {
+  display: block;
+  min-width: 0;
+}
+
+#main:focus,
+#main:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.hero {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: calc(100svh - var(--header-h));
+  padding-top: var(--space-4);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: repeat(var(--col), minmax(0, 1fr));
+  column-gap: var(--space-3);
+  align-items: center;
+  padding-block: var(--space-4);
+}
+
+.hero-text {
+  grid-column: 1 / span 7;
+  min-width: 0;
+}
+
+.hero-label {
+  margin-bottom: var(--space-3);
+}
+
+.hero-name {
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.hero-name span {
+  display: block;
+}
+
+.hero-tagline {
+  max-width: 44ch;
+  margin-bottom: var(--space-4);
+  font-size: var(--step-h3);
+  line-height: 1.4;
+  color: var(--fg-2);
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Right column: five empty slots the scene lends the featured cards to. */
+.hero-fan {
+  grid-column: 8 / -1;
+  position: relative;
+  align-self: stretch;
+  min-height: 24rem;
+  pointer-events: none;
+}
+
+.fan-slot {
+  --x: 0%;
+  --y: 0%;
+  --w: 56%;
+  --r: 0deg;
+  position: absolute;
+  top: calc(50% + var(--y));
+  left: calc(50% + var(--x));
+  width: var(--w);
+  aspect-ratio: 16 / 10;
+  translate: -50% -50%;
+}
+
+/* Slot order matches card order: Syncra in front and centre, the rest fanned out. */
+.fan-slot[data-fan-slot='0'] { --w: 72%; --y: -4%; }
+.fan-slot[data-fan-slot='1'] { --x: -16%; --r: -7deg; }
+.fan-slot[data-fan-slot='2'] { --x: 16%; --r: 7deg; }
+.fan-slot[data-fan-slot='3'] { --x: -30%; --y: 6%; --r: -14deg; }
+.fan-slot[data-fan-slot='4'] { --x: 30%; --y: 6%; --r: 14deg; }
+
+/* ---------- Technology ribbon ---------- */
+.tech {
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: var(--track-label);
+  color: var(--fg-2);
+}
+
+.tech:focus-visible {
+  border-radius: 0;
+}
+
+.tech-track {
+  display: flex;
+  width: max-content;
+  animation: tech-scroll 40s linear infinite;
+}
+
+.tech:hover .tech-track,
+.tech:focus-within .tech-track {
+  animation-play-state: paused;
+}
+
+.tech-list {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-4) var(--space-2) 0;
+  list-style: none;
+  white-space: nowrap;
+}
+
+@keyframes tech-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Reduced motion: the ribbon stops and becomes a plain wrapped list. */
+@media (prefers-reduced-motion: reduce) {
+  .tech-track {
+    width: auto;
+    max-width: calc(var(--content) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .tech-list {
+    flex-wrap: wrap;
+    row-gap: var(--space-1);
+    white-space: normal;
+  }
+  .tech-list--copy {
+    display: none;
+  }
+}
+
+html[data-motion='reduce'] .tech-track {
+  width: auto;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+html[data-motion='reduce'] .tech-list {
+  flex-wrap: wrap;
+  row-gap: var(--space-1);
+  white-space: normal;
+}
+
+html[data-motion='reduce'] .tech-list--copy {
+  display: none;
+}
+
+/* Still composition: hidden unless motion is reduced on a wide screen. */
+.hero-still {
+  display: none;
+}
+
+.hero-still-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 62%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top left;
+  padding: var(--card-pad);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  translate: -50% -50%;
+}
+
+.hero-still-img:nth-child(1) { z-index: 3; width: 70%; translate: -50% -56%; }
+.hero-still-img:nth-child(2) { z-index: 2; translate: -82% -38%; rotate: -7deg; }
+.hero-still-img:nth-child(3) { z-index: 1; translate: -18% -38%; rotate: 7deg; }
+
+/* Reduced motion on wide screens: no scene, a still stack of three screenshots instead. */
+@media (min-width: 960px) and (prefers-reduced-motion: reduce) {
+  .hero {
+    min-height: calc(70svh - var(--header-h));
+  }
+  .hero-still {
+    display: block;
+  }
+}
+
+@media (min-width: 960px) {
+  html[data-motion='reduce'] .hero {
+    min-height: calc(70svh - var(--header-h));
+  }
+  html[data-motion='reduce'] .hero-still {
+    display: block;
+  }
+}
+
+/* Never alongside the live scene. */
+.scene-ready .hero-still {
+  display: none !important;
+}
+
+/* ---------- Narrow screens: identity and CTAs first, no scene ---------- */
+@media (max-width: 959.98px) {
+  .hero {
+    min-height: 0;
+    padding-top: var(--space-3);
+  }
+
+  .hero-inner {
+    display: block;
+    padding-block: var(--space-2) var(--space-4);
+  }
+
+  .hero-name {
+    font-stretch: 100%;
+  }
+
+  .hero-tagline {
+    font-size: var(--step-body);
+    line-height: var(--lh-body);
+    margin-bottom: var(--space-3);
+  }
+
+  .hero-cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+
+  .hero-cta .btn {
+    white-space: normal;
+    text-align: center;
+  }
+
+  .hero-fan {
+    display: none;
+  }
+
+  .tech-track {
+    animation-duration: 60s;
+  }
+}

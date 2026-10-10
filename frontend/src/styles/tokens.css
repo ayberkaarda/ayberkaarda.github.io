@@ -1,0 +1,34 @@
+/* Design tokens. Every partial reads from these names; do not hard-code values elsewhere. */
+:root{
+  --bg:#0E0F13; --surface:#15171D; --line:#262932; --wave:#1A1D25;
+  --fg:#ECE7DD; --fg-2:#9AA0AB; --accent:#FF5C1A; --on-accent:#0E0F13;
+  --band-bg:#CCC6B6; --band-fg:#121318; --band-fg-2:#262833; --band-accent:#8A2D07;
+  --band-edge:#0E0F13; --band-fade:clamp(96px,8vw,128px);
+  --scheme:dark;
+  --font-display:'Archivo Variable',system-ui,sans-serif;         /* wdth 112, wght 600–700 */
+  --font-body:'IBM Plex Sans',system-ui,sans-serif;               /* 400/600, latin+latin-ext */
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;             /* 400, etiket/tarih/sayaç */
+  --step-display:clamp(3rem,8.5vw,8.5rem); --step-h2:clamp(2rem,4.5vw,4rem);
+  --step-h3:1.375rem; --step-body:1.0625rem; --step-label:.8125rem;
+  --lh-display:.95; --lh-body:1.55; --track-label:.08em;
+  --col:12; --content:1280px; --gutter:clamp(1rem,4vw,3rem);
+  --space-1:.5rem; --space-2:1rem; --space-3:1.5rem; --space-4:2.5rem; --space-5:4rem; --space-6:6rem;
+  --section-gap:clamp(6rem,12vw,10rem);        /* mobil ~96, masaüstü 160 */
+  --r-card:12px; --r-img:6px; --r-pill:999px; --r-btn:2px; --card-pad:10px;
+  --ease-out:cubic-bezier(.2,.8,.2,1); --ease-std:cubic-bezier(.4,0,.2,1);
+  --t-fast:160ms; --t-base:280ms; --t-slow:420ms; --t-theme:200ms;
+  --header-h:64px; --header-h-m:56px; --pill-h:56px;
+  --focus:0 0 0 2px var(--bg),0 0 0 4px var(--accent);
+}
+
+/* Light theme: warm paper, ink text, a burnt orange deep enough for AA on paper.
+   The Experience band becomes one step deeper sand: still the calmest block, not a dark slab. */
+:root[data-theme='light']{
+  --bg:#F4F1EA; --surface:#FBF9F4; --line:#D9D3C6; --wave:#E6E0D3;
+  --fg:#16171C; --fg-2:#5A5F6B; --accent:#B23C0C; --on-accent:#FFFCF7;
+  --band-bg:#E3DBC9; --band-fg:#121318; --band-fg-2:#3A3D48; --band-accent:#8A2D07;
+  --band-edge:#F4F1EA;
+  --scheme:light;
+}
+@media (prefers-reduced-motion:reduce){:root{--t-fast:0ms;--t-base:0ms;--t-slow:0ms;--t-theme:0ms}}
+:root[data-motion='reduce']{--t-fast:0ms;--t-base:0ms;--t-slow:0ms;--t-theme:0ms}

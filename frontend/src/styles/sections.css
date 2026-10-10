@@ -1,0 +1,144 @@
+/* Experience, education, skills, contact and footer. */
+
+app-experience,
+app-skills,
+app-contact { display: block; min-width: 0; }
+
+:is(#experience, #skills, #contact) {
+  padding-block: var(--section-gap);
+  overflow-wrap: anywhere;
+}
+
+#experience {
+  /* Tonal fades between the dark page and the band; both end inside the section padding.
+     One untiled layer spans the whole box, and the base colour is the edge tone, so a
+     fractional section height can never leave a light row at either seam. */
+  background:
+    linear-gradient(
+      to bottom,
+      var(--band-edge),
+      var(--band-bg) var(--band-fade),
+      var(--band-bg) calc(100% - var(--band-fade)),
+      var(--band-edge) calc(100% - 2px)
+    ) var(--band-edge);
+  color: var(--band-fg);
+}
+
+/* Small mono text on the band: full ink, readable size. The accent stays decorative. */
+#experience :is(.section-num, .experience-date, .education-block > h3) {
+  font-size: .875rem;
+  color: var(--band-fg);
+}
+#experience .section-num::before,
+#experience .education-block > h3::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 2px;
+  margin-right: .75rem;
+  vertical-align: .3em;
+  background: var(--band-accent);
+}
+
+:is(#experience, #skills) .section-num { margin-bottom: var(--space-5); line-height: var(--lh-body); }
+
+.experience-entry,
+.education-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--space-4);
+}
+
+.experience-entry {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.experience-entry > *, .education-entry > *, .skills-group { min-width: 0; }
+.experience-date { letter-spacing: normal; }
+.experience-body h3 { font-size: var(--step-h2); }
+.experience-role { margin-top: var(--space-1); color: var(--band-fg-2); }
+.experience-points { padding-left: var(--space-3); margin-top: var(--space-3); }
+.experience-points li + li { margin-top: var(--space-1); }
+.experience-points li::marker { color: var(--band-accent); }
+
+.education-block {
+  border-top: 1px solid var(--line);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+}
+.education-block > h3 { margin-bottom: var(--space-3); }
+.education-entry p:not(.experience-date) { margin-top: var(--space-1); }
+.education-points { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin-top: var(--space-2); }
+
+.skills-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); }
+.skills-group h3 { color: var(--accent); margin-bottom: var(--space-3); line-height: var(--lh-body); }
+.skills-group li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-2);
+  padding-block: var(--space-2);
+  border-top: 1px solid var(--line);
+}
+
+.contact-title { overflow-wrap: anywhere; }
+.contact-email {
+  display: inline-block;
+  max-width: 100%;
+  min-height: 44px;
+  margin-top: var(--space-4);
+  padding-block: var(--space-1);
+  font-size: var(--step-h2);
+  line-height: var(--lh-body);
+  overflow-wrap: anywhere;
+}
+.contact-links { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+.contact-links .btn { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.contact-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  border-top: 1px solid var(--line);
+  margin-top: var(--space-6);
+  padding-top: var(--space-3);
+  letter-spacing: normal;
+}
+.motion-toggle {
+  min-height: 44px;
+  min-width: 44px;
+  max-width: 100%;
+  padding: var(--space-1);
+  border: 1px solid transparent;
+  border-radius: var(--r-btn);
+  background: transparent;
+  font: inherit;
+  color: var(--fg-2);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  overflow-wrap: anywhere;
+}
+.motion-toggle:hover, .motion-toggle[aria-pressed='true'] { color: var(--accent); }
+
+@media (max-width: 959.98px) {
+  .experience-entry, .education-entry, .skills-columns { grid-template-columns: minmax(0, 1fr); }
+  .experience-entry, .education-entry { gap: var(--space-2); }
+  .contact-links { flex-direction: column; align-items: stretch; }
+}
+
+/* Reduced motion always leaves content visible. */
+.reveal { opacity: 1; transform: none; }
+.reveal--heading { clip-path: inset(0); }
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='reduce']) .reveal {
+    transition: opacity var(--t-slow) var(--ease-out), transform var(--t-slow) var(--ease-out), clip-path var(--t-slow) var(--ease-out);
+  }
+  html:not([data-motion='reduce']) .reveal:not(.is-in) { opacity: 0; transform: translateY(var(--space-2)); }
+  html:not([data-motion='reduce']) .reveal--heading:not(.is-in) { clip-path: inset(0 0 100% 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; clip-path: inset(0) !important; transition: none !important; }
+}
+html[data-motion='reduce'] .reveal { opacity: 1 !important; transform: none !important; clip-path: inset(0) !important; transition: none !important; }

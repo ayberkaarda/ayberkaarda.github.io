@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ayberk Arda — Junior Full-Stack Developer</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ayberk Arda, junior full-stack developer in Istanbul. Java Spring Boot, Laravel, React and Angular. Experience and projects.">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0E0F13">
+  <script>
+    (function () {
+      var d = document.documentElement, t, m;
+      try { t = localStorage.getItem('theme-pref'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      d.setAttribute('data-theme', t);
+      m = document.querySelector('meta[name="color-scheme"]');
+      if (m) m.setAttribute('content', t);
+      m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', t === 'light' ? '#F4F1EA' : '#0E0F13');
+    })();
+  </script>
+  <link rel="preload" href="media/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="media/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ayberk Arda">
+  <meta property="og:title" content="Ayberk Arda — Junior Full-Stack Developer">
+  <meta property="og:description" content="Ayberk Arda, junior full-stack developer in Istanbul. Java Spring Boot, Laravel, React and Angular. Experience and projects.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+  <app-root></app-root>
+  <noscript>
+    <p style="font-family: system-ui, sans-serif; padding: 1.5rem; background: var(--bg); color: var(--fg);">
+      Ayberk Arda — Junior Full-Stack Developer, Istanbul.
+      This site needs JavaScript.
+      <a href="https://github.com/ayberkaarda">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/ayberk-arda/">LinkedIn</a>
+    </p>
+  </noscript>
+</body>
+</html>
