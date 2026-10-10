@@ -1,0 +1,179 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+# No default token scopes; each job requests only what it needs.
+permissions: {}
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      # Usage: node -e "$VALIDATE_PROJECTS" -- <site root> [<source root to compare with>]
+      VALIDATE_PROJECTS: |
+        const fs = require("fs");
+        const args = process.argv.slice(1).filter((a) => a !== "--");
+        const root = args[0];
+        const sourceRoot = args[1];
+        if (!root) { console.error("::error::site root argument missing"); process.exit(2); }
+        const file = root + "/data/projects.json";
+        // Owner is fixed; repo name is a single path segment (no "/", no "." or "..").
+        const repoRe = /^https:\/\/github\.com\/ayberkaarda\/[A-Za-z0-9._-]+$/;
+        const repoOk = (u) => typeof u === "string" && repoRe.test(u) && !/\/\.{1,2}$/.test(u);
+        const langs = ["tr", "en", "fr", "de"];
+        const fields = ["name", "summary", "description"];
+        const errors = [];
+        let raw, data;
+        try {
+          raw = fs.readFileSync(file);
+          data = JSON.parse(raw.toString("utf8"));
+        } catch (e) {
+          console.error("::error::" + file + " unreadable: " + e.message);
+          process.exit(1);
+        }
+        if (sourceRoot) {
+          const sourceFile = sourceRoot + "/data/projects.json";
+          let src = null;
+          try { src = fs.readFileSync(sourceFile); } catch (e) { errors.push(sourceFile + " unreadable: " + e.message); }
+          if (src && !src.equals(raw)) errors.push(file + " differs from " + sourceFile);
+        }
+        const list = data && typeof data === "object" ? data.projects : undefined;
+        // An empty list is rejected on purpose: hiding every project must not publish a blank site.
+        if (!Array.isArray(list) || list.length === 0) errors.push("projects array missing or empty");
+        const seen = new Set();
+        (Array.isArray(list) ? list : []).forEach((p, i) => {
+          if (!p || typeof p !== "object" || Array.isArray(p)) { errors.push("#" + i + ": not an object"); return; }
+          const id = typeof p.slug === "string" ? p.slug : "#" + i;
+          if (typeof p.slug !== "string" || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.slug)) errors.push(id + ": slug is not kebab-case");
+          else if (seen.has(p.slug)) errors.push(id + ": duplicate slug");
+          else seen.add(p.slug);
+          if (!repoOk(p.repoUrl)) errors.push(id + ": invalid repoUrl " + JSON.stringify(p.repoUrl));
+          if (!Array.isArray(p.extraRepoUrls)) errors.push(id + ": extraRepoUrls is not an array");
+          else p.extraRepoUrls.forEach((u) => { if (!repoOk(u)) errors.push(id + ": invalid extraRepoUrls entry " + JSON.stringify(u)); });
+          langs.forEach((l) => {
+            const t = p.texts && p.texts[l];
+            fields.forEach((f) => {
+              if (!t || typeof t[f] !== "string" || t[f].trim() === "") errors.push(id + ": texts." + l + "." + f + " is empty");
+            });
+            // Optional detail sections: when present they must match the export structure.
+            if (t && t.sections !== undefined) {
+              const at = id + ": texts." + l + ".sections";
+              if (!Array.isArray(t.sections)) { errors.push(at + " is not an array"); return; }
+              t.sections.forEach((s, si) => {
+                const sp = at + "[" + si + "]";
+                if (!s || typeof s !== "object" || Array.isArray(s)) { errors.push(sp + " is not an object"); return; }
+                if (typeof s.heading !== "string") errors.push(sp + ".heading is not a string");
+                if (!Array.isArray(s.blocks)) { errors.push(sp + ".blocks is not an array"); return; }
+                s.blocks.forEach((b, bi) => {
+                  const bp = sp + ".blocks[" + bi + "]";
+                  if (!b || typeof b !== "object" || Array.isArray(b)) errors.push(bp + " is not an object");
+                  else if (b.type === "p") { if (typeof b.text !== "string") errors.push(bp + ".text is not a string"); }
+                  else if (b.type === "ul") {
+                    if (!Array.isArray(b.items) || !b.items.every((x) => typeof x === "string")) errors.push(bp + ".items is not an array of strings");
+                  }
+                  else errors.push(bp + ".type must be p or ul");
+                });
+              });
+            }
+          });
+          if (typeof p.image !== "string") { errors.push(id + ": image missing"); return; }
+          if (!/^\/projects\/[a-z0-9-]+\.[A-Za-z]+$/.test(p.image)) { errors.push(id + ": unexpected image path " + JSON.stringify(p.image)); return; }
+          // Same derivation as the site: full() in pages/project.ts, thumb() in pages/home.ts.
+          const rel = p.image.replace(/^\//, "");
+          [rel.replace(/\.[a-z]+$/i, ".webp"), rel.replace(/\.[a-z]+$/i, "-thumb.webp")].forEach((f) => {
+            const target = root + "/" + f;
+            if (!fs.existsSync(target) || !fs.statSync(target).isFile()) errors.push(id + ": missing " + target);
+          });
+        });
+        if (errors.length) {
+          errors.forEach((e) => console.error("::error::" + e));
+          process.exit(1);
+        }
+        console.log(file + " OK: " + list.length + " projects" + (sourceRoot ? ", identical to source" : ""));
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4 (v4.4.0)
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4 (v4.4.0)
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      # Lifecycle scripts are disabled: esbuild, lmdb, msgpackr-extract and
+      # @parcel/watcher ship prebuilt binaries via optional dependencies, and
+      # sharp is only used by the local image script, not by ng build.
+      # Two-stage check with one script: the source file before the build, and
+      # the file that is actually published (dist) after the build.
+      - name: Validate projects.json (source)
+        run: node -e "$VALIDATE_PROJECTS" -- frontend/public
+
+      - name: Install
+        working-directory: frontend
+        run: npm ci --ignore-scripts
+
+      - name: Build
+        working-directory: frontend
+        run: npx ng build
+
+      # The published copy must be byte-identical to the validated source, and
+      # every image it references must exist inside the published output.
+      - name: Validate projects.json (published output)
+        run: node -e "$VALIDATE_PROJECTS" -- frontend/dist/frontend/browser frontend/public
+
+      # GitHub Pages has no SPA fallback: unknown paths (e.g. /de/projects/inertia/)
+      # are served 404.html, which is the same app shell.
+      - name: SPA fallback
+        run: cp frontend/dist/frontend/browser/index.html frontend/dist/frontend/browser/404.html
+
+      # Real files for every known route, so language and project URLs return
+      # HTTP 200 instead of the 404 status of the fallback page.
+      - name: Route copies
+        working-directory: frontend/dist/frontend/browser
+        run: |
+          set -euo pipefail
+          slugs=$(node -p "require('./data/projects.json').projects.map((p) => p.slug).join(' ')")
+          count=0
+          for l in tr en fr de; do
+            [[ "$l" =~ ^[a-z0-9-]+$ ]] || { echo "::error::invalid language: $l"; exit 1; }
+            mkdir -p "$l"
+            cp index.html "$l/index.html"
+            count=$((count + 1))
+            for s in $slugs; do
+              [[ "$s" =~ ^[a-z0-9-]+$ ]] || { echo "::error::invalid slug: $s"; exit 1; }
+              mkdir -p "$l/projects/$s"
+              cp index.html "$l/projects/$s/index.html"
+              count=$((count + 1))
+            done
+          done
+          echo "Route copies: $count"
+
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3 (v3.0.1)
+        with:
+          path: frontend/dist/frontend/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4 (v4.0.5)
