@@ -1,7 +1,6 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { ui, type Lang } from '../i18n';
 import { person } from '../profile';
-import { MotionPrefService } from '../motion-pref';
 import { Reveal } from '../reveal';
 
 @Component({
@@ -18,9 +17,7 @@ import { Reveal } from '../reveal';
           <a class="btn btn--ghost" [href]="person.linkedin" rel="noopener">LinkedIn</a>
           <a class="btn btn--ghost" [href]="person.github" rel="noopener">GitHub</a>        </div>
         <footer class="contact-footer mono">
-          <span>{{ year }} · {{ city() }} ·</span>
-          <button type="button" class="motion-toggle" [attr.aria-pressed]="motion.reduce()"
-            (click)="motion.set(!motion.reduce())">{{ t().motion.reduce }}</button>
+          <span>{{ year }} · {{ city() }}</span>
         </footer>
       </div>
     </section>
@@ -30,7 +27,6 @@ export class ContactSection {
   readonly lang = input.required<Lang>();
   protected readonly person = person;
   protected readonly year = new Date().getFullYear();
-  protected readonly motion = inject(MotionPrefService);
   protected readonly t = computed(() => ui[this.lang()]);
   protected readonly city = computed(() => this.lang() === 'tr' ? 'İstanbul' : 'Istanbul');
 }

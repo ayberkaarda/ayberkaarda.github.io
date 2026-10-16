@@ -11,10 +11,12 @@ import {
   viewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { NgTemplateOutlet } from '@angular/common';
 import { LANGS, LANG_NAMES, ui, type Lang } from './i18n';
 import { person } from './profile';
 import { MobileMenu } from './mobile-menu';
 import { ThemeService } from './theme';
+import { MotionPrefService } from './motion-pref';
 
 const SECTIONS = ['projects', 'experience', 'skills', 'contact'] as const;
 
@@ -33,7 +35,7 @@ const LANG_KEY = 'lang-pref';
  */
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, MobileMenu],
+  imports: [RouterLink, MobileMenu, NgTemplateOutlet],
   template: `
     <header
       #bar
@@ -86,6 +88,7 @@ const LANG_KEY = 'lang-pref';
         </div>
 
         <div #end class="site-header__end d-only">
+          <ng-container *ngTemplateOutlet="motionSwitch" />
           <button
             type="button"
             class="theme-btn"
@@ -109,6 +112,7 @@ const LANG_KEY = 'lang-pref';
         </div>
 
         <div class="site-header__m m-only">
+          <ng-container *ngTemplateOutlet="motionSwitch" />
           <details #langMenu class="m-lang" (keydown.escape)="closeLang(true)">
             <summary [attr.aria-label]="t().lang.label + ': ' + names[lang()]">
               {{ lang().toUpperCase() }} <span aria-hidden="true">▾</span>
@@ -150,6 +154,16 @@ const LANG_KEY = 'lang-pref';
         [active]="active()"
       />
     </header>
+    <ng-template #motionSwitch>
+      <button type="button" class="motion-switch" role="switch"
+        [attr.aria-checked]="!motion.reduce()" [attr.aria-label]="t().motion.label"
+        [attr.title]="t().motion.label + ': ' + (motion.reduce() ? t().motion.off : t().motion.on)"
+        (click)="motion.set(!motion.reduce())">
+        <span class="motion-switch__label" aria-hidden="true">{{ t().motion.label }}</span>
+        <span class="motion-switch__state" aria-hidden="true">{{ motion.reduce() ? t().motion.off : t().motion.on }}</span>
+        <span class="motion-switch__track" aria-hidden="true"><span></span></span>
+      </button>
+    </ng-template>
   `,
 })
 export class SiteHeader {
@@ -163,6 +177,7 @@ export class SiteHeader {
 
   protected readonly person = person;
   protected readonly theme = inject(ThemeService);
+  protected readonly motion = inject(MotionPrefService);
   protected readonly langs = LANGS;
   protected readonly names = LANG_NAMES;
   protected readonly t = computed(() => ui[this.lang()]);
@@ -193,6 +208,7 @@ export class SiteHeader {
     afterRenderEffect({
       read: () => {
         this.lang();
+        this.motion.reduce();
         this.fit();
       },
     });

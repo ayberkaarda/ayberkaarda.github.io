@@ -15,7 +15,7 @@ Ayberk Arda'nın kişisel portfolyo sitesi; canlı adres **https://ayberkaarda.g
 | --- | --- |
 | <img src="docs/screenshots/mobile-dark.png" width="300" alt="390 px genişliğinde telefon ekranında ana sayfa, koyu tema"> | <img src="docs/screenshots/mobile-light.png" width="300" alt="390 px genişliğinde telefon ekranında ana sayfa, açık tema"> |
 
-Herkese açık site ekran görüntüleri, 16 Ekim 2026 tarihinde canlı sitenin İngilizce sürümünden 1440 × 1000 (masaüstü) ve 390 × 844 (mobil) boyutlarında alınmıştır. Görseller yeni eklenen CVera, MERIDIAN ve LearnToPoker projelerini içerir.
+Herkese açık site ekran görüntüleri, 16 Ekim 2026 tarihinde güncel üretim derlemesinin İngilizce sürümünden 1440 × 1000 (masaüstü) ve 390 × 844 (mobil) boyutlarında alınmıştır. Görseller header’daki animasyon switch’ini ve yeni eklenen CVera, MERIDIAN ve LearnToPoker projelerini içerir.
 
 ### Proje sayfaları
 
@@ -44,6 +44,7 @@ Yönetim panelinin arayüzü Türkçedir. Bu önceki panel görüntüsü yöneti
 - Angular 22, bağımsız (standalone) bileşenler ve sinyaller; çalışma anında sunucu tarafı yok.
 - `/tr/`, `/en/`, `/fr/`, `/de/` altında dört dil. Kök yol `/` önce kaydedilmiş seçime, sonra tarayıcı diline, hiçbiri yoksa İngilizceye yönlendirir.
 - Açık ve koyu tema. Ziyaretçi seçim yapana kadar tema sistem ayarını izler; satır içi bir betik temayı ilk boyamadan önce uygular.
+- Masaüstü ve mobil header’da erişilebilir animasyon aç/kapat switch’i. Tercih yerel olarak kaydedilir ve proje sayfalarında korunur; footer’da artık hareket kontrolü bulunmaz.
 - Ana sayfa bölümleri: giriş, projeler, deneyim, yetenekler, iletişim.
 - Geniş ekranlarda öne çıkan proje kartları girişte yelpaze olarak başlar ve kaydırdıkça proje ızgarasına yerleşir. Sahne kodu ayrı, tembel yüklenen bir parçadır; dar ekranlarda ve hareket azaltma tercihinde yüklenmez.
 - Her proje için bir sayfa (`/<dil>/projects/<slug>/`): özet, görsel, teknolojiler, bağlantılar, öne çıkanlar, isteğe bağlı detay bölümleri ve önceki/sonraki gezinmesi.
@@ -188,7 +189,7 @@ cd frontend
 npx ng build           # üretim derlemesi
 ```
 
-Ekim 2026 proje güncellemesinin üretim derlemesi, ilk yükleme için tahmini aktarım boyutunu 91.23 kB olarak bildirir.
+Ekim 2026 header güncellemesinin üretim derlemesi, ilk yükleme için tahmini aktarım boyutunu 91.45 kB olarak bildirir.
 
 ## Güvenlik notları
 

@@ -106,21 +106,6 @@ app-contact { display: block; min-width: 0; }
   padding-top: var(--space-3);
   letter-spacing: normal;
 }
-.motion-toggle {
-  min-height: 44px;
-  min-width: 44px;
-  max-width: 100%;
-  padding: var(--space-1);
-  border: 1px solid transparent;
-  border-radius: var(--r-btn);
-  background: transparent;
-  font: inherit;
-  color: var(--fg-2);
-  text-decoration: underline;
-  text-underline-offset: .2em;
-  overflow-wrap: anywhere;
-}
-.motion-toggle:hover, .motion-toggle[aria-pressed='true'] { color: var(--accent); }
 
 @media (max-width: 959.98px) {
   .experience-entry, .education-entry, .skills-columns { grid-template-columns: minmax(0, 1fr); }

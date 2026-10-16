@@ -45,7 +45,7 @@ export interface UiStrings {
   menu: { open: string; close: string };
   lang: { label: string };
   contact: { title: string };
-  motion: { reduce: string };
+  motion: { label: string; on: string; off: string };
   /** Short count label next to a skill, e.g. 3 -> '3 projects'. */
   project: { prev: string; next: string; original: string };
 }
@@ -87,7 +87,7 @@ export const ui: Record<Lang, UiStrings> = {
     menu: { open: 'Menu', close: 'Close' },
     lang: { label: 'Choose language' },
     contact: { title: 'Let’s talk' },
-    motion: { reduce: 'Reduce motion' },
+    motion: { label: 'Animations', on: 'On', off: 'Off' },
     project: { prev: 'Previous project', next: 'Next project', original: 'Open full-size image' },
   },
   tr: {
@@ -127,7 +127,7 @@ export const ui: Record<Lang, UiStrings> = {
     menu: { open: 'Menü', close: 'Kapat' },
     lang: { label: 'Dil seç' },
     contact: { title: 'Konuşalım' },
-    motion: { reduce: 'Hareketi azalt' },
+    motion: { label: 'Animasyon', on: 'Açık', off: 'Kapalı' },
     project: { prev: 'Önceki proje', next: 'Sonraki proje', original: 'Görseli tam boyutta aç' },
   },
   fr: {
@@ -167,7 +167,7 @@ export const ui: Record<Lang, UiStrings> = {
     menu: { open: 'Menu', close: 'Fermer' },
     lang: { label: 'Choisir la langue' },
     contact: { title: 'Parlons-en' },
-    motion: { reduce: 'Réduire les animations' },
+    motion: { label: 'Animations', on: 'Activées', off: 'Désactivées' },
     project: { prev: 'Projet précédent', next: 'Projet suivant', original: 'Ouvrir l’image en taille réelle' },
   },
   de: {
@@ -207,7 +207,7 @@ export const ui: Record<Lang, UiStrings> = {
     menu: { open: 'Menü', close: 'Schließen' },
     lang: { label: 'Sprache wählen' },
     contact: { title: 'Sprechen wir' },
-    motion: { reduce: 'Bewegung reduzieren' },
+    motion: { label: 'Animationen', on: 'An', off: 'Aus' },
     project: { prev: 'Vorheriges Projekt', next: 'Nächstes Projekt', original: 'Bild in Originalgröße öffnen' },
   },
 };
