@@ -88,6 +88,12 @@ const local: Record<Lang, { year: string; loading: string; loadError: string; no
           <p class="pp-lead">{{ text().summary }}</p>
         </header>
 
+        @if (pr.slug === 'learntopoker') {
+          <p class="pp-gambling-warning">
+            {{ text().description.split('. ').slice(0, 2).join('. ') }}.
+          </p>
+        }
+
         @if (pr.image) {
           <figure class="pp-shot">
             <img

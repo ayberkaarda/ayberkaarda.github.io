@@ -1,5 +1,139 @@
 [
   {
+    "slug": "cvera",
+    "repo": "CVera",
+    "extraRepos": [],
+    "visible": true,
+    "featured": true,
+    "image": "cvera.png",
+    "year": 2026,
+    "wip": false,
+    "stack": [
+      "Laravel 12",
+      "PHP",
+      "Three.js",
+      "SQLite",
+      "Tesseract.js"
+    ],
+    "sort": 1,
+    "texts": {
+      "tr": {
+        "name": "CVera",
+        "summary": "CV analizi, iş ilanı eşleştirme ve portfolyo oluşturma çalışma alanı",
+        "description": "CVera; açıklanabilir ATS kontrollerini, iş ilanıyla beceri karşılaştırmasını, OCR ile metin çıkarmayı ve canlı önizlemeli CV oluşturmayı bir araya getirir. PDF çıktısı, ön yazı hazırlama, 25 CV şablonu ve 18 portfolyo tasarımı sunar. Temel araçlar kayıt gerektirmez; isteğe bağlı hesaplarla belgeler ve sürüm geçmişi saklanabilir.",
+        "highlights": []
+      },
+      "en": {
+        "name": "CVera",
+        "summary": "A workspace for CV analysis, job matching and portfolio building",
+        "description": "CVera combines explainable ATS checks, job-specific skill comparison, OCR and a live-preview CV builder. It offers PDF export, cover letters, 25 CV templates and 18 portfolio designs. Core tools work without registration; optional accounts store documents and revision history.",
+        "highlights": []
+      },
+      "fr": {
+        "name": "CVera",
+        "summary": "Un espace pour analyser un CV et créer un portfolio",
+        "description": "CVera réunit des contrôles ATS explicables, la comparaison des compétences avec une offre, la reconnaissance de texte et un éditeur de CV avec aperçu. Il propose un export PDF, des lettres de motivation, 25 modèles de CV et 18 designs de portfolio. Les outils de base fonctionnent sans inscription ; un compte facultatif conserve les documents et leur historique.",
+        "highlights": []
+      },
+      "de": {
+        "name": "CVera",
+        "summary": "Ein Arbeitsbereich für Lebenslaufanalyse und Portfolios",
+        "description": "CVera verbindet nachvollziehbare ATS-Prüfungen, den Kompetenzvergleich mit Stellenanzeigen, OCR und einen Lebenslaufeditor mit Vorschau. PDF-Export, Anschreiben, 25 Lebenslaufvorlagen und 18 Portfoliodesigns ergänzen die Werkzeuge. Die Grundfunktionen benötigen keine Registrierung; optionale Konten speichern Dokumente und Versionen.",
+        "highlights": []
+      }
+    }
+  },
+  {
+    "slug": "meridian",
+    "repo": "MERIDIAN",
+    "extraRepos": [],
+    "visible": true,
+    "featured": true,
+    "image": "meridian.png",
+    "year": 2026,
+    "wip": false,
+    "stack": [
+      "Next.js 16",
+      "React 19",
+      "Three.js",
+      "React Three Fiber",
+      "GSAP",
+      "Lenis"
+    ],
+    "sort": 2,
+    "texts": {
+      "tr": {
+        "name": "MERIDIAN",
+        "summary": "Kaydırmayla ilerleyen, etkileşimli bir 3B uzay yolculuğu",
+        "description": "MERIDIAN, yörünge oluşumlarını ve bir uzay aracını sinematik kamera geçişleriyle keşfettiren bir havacılık ve uzay konsept sitesidir. Üç yörünge oluşumu seçilebilir; radyatör, kenetlenme halkası ve ana gövde ayrı ayrı incelenebilir. Klavye, dokunmatik kontrol ve azaltılmış hareket tercihi desteklenir.",
+        "highlights": []
+      },
+      "en": {
+        "name": "MERIDIAN",
+        "summary": "An interactive, scroll-driven 3D journey through space",
+        "description": "MERIDIAN is an aerospace concept website with cinematic camera transitions through orbital formations and a spacecraft. Visitors can select three orbital formations and inspect the radiator array, docking ring and main bus individually. Keyboard, touch and reduced-motion preferences are supported.",
+        "highlights": []
+      },
+      "fr": {
+        "name": "MERIDIAN",
+        "summary": "Un voyage spatial 3D interactif au fil du défilement",
+        "description": "MERIDIAN est un site conceptuel aérospatial avec des transitions de caméra cinématographiques. Trois formations orbitales peuvent être sélectionnées ; les radiateurs, l’anneau d’amarrage et le corps principal du véhicule peuvent être inspectés séparément. Le clavier, le tactile et la réduction des animations sont pris en charge.",
+        "highlights": []
+      },
+      "de": {
+        "name": "MERIDIAN",
+        "summary": "Eine interaktive 3D-Weltraumreise beim Scrollen",
+        "description": "MERIDIAN ist eine Aerospace-Konzeptwebsite mit filmischen Kamerafahrten durch Orbitalformationen und ein Raumfahrzeug. Drei Formationen lassen sich auswählen; Radiatoren, Andockring und Hauptkörper können einzeln untersucht werden. Tastatur, Touch und reduzierte Bewegung werden unterstützt.",
+        "highlights": []
+      }
+    }
+  },
+  {
+    "slug": "learntopoker",
+    "repo": "LearnToPoker",
+    "extraRepos": [],
+    "visible": true,
+    "featured": true,
+    "image": "learntopoker.jpg",
+    "year": 2026,
+    "wip": false,
+    "stack": [
+      "React 18",
+      "Vite",
+      "Three.js",
+      "React Three Fiber",
+      "Zustand",
+      "i18next"
+    ],
+    "sort": 3,
+    "texts": {
+      "tr": {
+        "name": "LearnToPoker",
+        "summary": "Sanal fişlerle poker kurallarını öğreten etkileşimli eğitim uygulaması",
+        "description": "KUMAR KÖTÜDÜR. OYNAMAYIN. Kumar bağımlılığa, maddi kayıplara ve ilişkilerin zarar görmesine yol açabilir. LearnToPoker, gerçek para içermeyen bir eğitim projesidir. Türkçe ve İngilizce dersler, el sıralamaları, 11 varyant, sınavlar ve açıklamalı örnek eller içerir. Dört oyun türünde botlara karşı sanal fişlerle pratik yapılır; 3B masa ve olasılık açıklamaları kararların nasıl işlediğini gösterir.",
+        "highlights": []
+      },
+      "en": {
+        "name": "LearnToPoker",
+        "summary": "Interactive poker lessons and practice with virtual chips",
+        "description": "GAMBLING IS HARMFUL. DO NOT GAMBLE. Gambling can cause addiction, financial losses and damage to relationships. LearnToPoker is an educational project with no real-money play. Turkish and English lessons cover hand rankings, 11 variants, quizzes and illustrated sample hands. Four playable variants use virtual chips against bots, with a 3D table and explanations of probabilities and decisions.",
+        "highlights": []
+      },
+      "fr": {
+        "name": "LearnToPoker",
+        "summary": "Des leçons de poker interactives avec des jetons virtuels",
+        "description": "LES JEUX D’ARGENT SONT NOCIFS. NE JOUEZ PAS D’ARGENT. Ils peuvent entraîner une dépendance, des pertes financières et nuire aux relations. LearnToPoker est un projet pédagogique sans argent réel. Les leçons en turc et en anglais présentent les combinaisons, 11 variantes, des quiz et des exemples commentés. Quatre variantes permettent de pratiquer contre des bots avec des jetons virtuels et une table 3D.",
+        "highlights": []
+      },
+      "de": {
+        "name": "LearnToPoker",
+        "summary": "Interaktive Pokerlektionen mit virtuellen Chips",
+        "description": "GLÜCKSSPIEL IST SCHÄDLICH. SPIELEN SIE NICHT UM GELD. Glücksspiel kann abhängig machen, finanzielle Verluste verursachen und Beziehungen schädigen. LearnToPoker ist ein Lernprojekt ohne Echtgeld. Türkische und englische Lektionen behandeln Handrangfolgen, elf Varianten, Quizfragen und kommentierte Beispielhände. Vier Varianten bieten Übungen gegen Bots mit virtuellen Chips und einem 3D-Tisch.",
+        "highlights": []
+      }
+    }
+  },
+  {
     "slug": "syncra-crm",
     "repo": "Syncra-CRM",
     "extraRepos": [
@@ -18,7 +152,7 @@
       "Tauri 2",
       "Rust"
     ],
-    "sort": 1,
+    "sort": 4,
     "texts": {
       "en": {
         "name": "Syncra CRM",
@@ -82,7 +216,7 @@
       "STOMP",
       "Prometheus"
     ],
-    "sort": 2,
+    "sort": 5,
     "texts": {
       "en": {
         "name": "Network SIEM Console",
@@ -146,7 +280,7 @@
       "Redis",
       "Docker"
     ],
-    "sort": 3,
+    "sort": 6,
     "texts": {
       "en": {
         "name": "Inertia",
@@ -209,7 +343,7 @@
       "FastAPI",
       "Turborepo"
     ],
-    "sort": 4,
+    "sort": 7,
     "texts": {
       "en": {
         "name": "Sarmal",
@@ -273,7 +407,7 @@
       "PostgreSQL 16",
       "Redis"
     ],
-    "sort": 5,
+    "sort": 8,
     "texts": {
       "en": {
         "name": "OmniHear",
@@ -336,7 +470,7 @@
       "Scikit-learn",
       "Pandas"
     ],
-    "sort": 6,
+    "sort": 9,
     "texts": {
       "en": {
         "name": "MediMind AI",
@@ -399,7 +533,7 @@
       "Hotwire",
       "Kamal"
     ],
-    "sort": 7,
+    "sort": 10,
     "texts": {
       "en": {
         "name": "DevSwap",
@@ -460,7 +594,7 @@
       "React",
       "Spring Batch"
     ],
-    "sort": 8,
+    "sort": 11,
     "texts": {
       "en": {
         "name": "EduCore",
@@ -522,7 +656,7 @@
       "Rust",
       "Tauri 2"
     ],
-    "sort": 9,
+    "sort": 12,
     "texts": {
       "en": {
         "name": "ByteLore",
@@ -566,7 +700,7 @@
       "Rust",
       "WASAPI"
     ],
-    "sort": 10,
+    "sort": 13,
     "texts": {
       "en": {
         "name": "Resonance",
@@ -610,7 +744,7 @@
       "C#",
       "WinForms"
     ],
-    "sort": 11,
+    "sort": 14,
     "texts": {
       "en": {
         "name": "VideoOyunYonetim",

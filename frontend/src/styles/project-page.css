@@ -271,3 +271,13 @@
   height: 100%;
   object-fit: cover;
 }
+.pp-gambling-warning {
+  margin: 0 0 2rem;
+  padding: 1.25rem 0;
+  border-block: 3px solid currentColor;
+  font-size: clamp(1.75rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
