@@ -20,25 +20,401 @@
                     "name": "CVera",
                     "summary": "CV analizi, iş ilanı eşleştirme ve portfolyo oluşturma çalışma alanı",
                     "description": "CVera; açıklanabilir ATS kontrollerini, iş ilanıyla beceri karşılaştırmasını, OCR ile metin çıkarmayı ve canlı önizlemeli CV oluşturmayı bir araya getirir. PDF çıktısı, ön yazı hazırlama, 25 CV şablonu ve 18 portfolyo tasarımı sunar. Temel araçlar kayıt gerektirmez; isteğe bağlı hesaplarla belgeler ve sürüm geçmişi saklanabilir.",
-                    "highlights": []
+                    "highlights": [
+                        "Sekiz kategoride açıklanabilir CV analizi ve ilan eşleştirme",
+                        "25 CV şablonu, 18 portfolyo tasarımı ve PDF/HTML çıktıları",
+                        "Tarayıcıda belge okuma, OCR ve isteğe bağlı bulut sürüm geçmişi"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Genel bakış",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "CVera, bir iş başvurusunun hazırlık sürecini tek çalışma alanında toplar: mevcut CV’yi inceleme, iş ilanıyla karşılaştırma, yeni belge oluşturma, ön yazı hazırlama ve kişisel portfolyo yayınlama. Temel araçlar üyelik gerektirmeden çalışır; hesap açmak isteyen kullanıcılar belgelerini bulutta saklayabilir ve eski sürümlerine dönebilir. Ürün, ücretli şablon kilitleri veya abonelik katmanları olmadan tasarlanmıştır."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "CV analizi ve iş ilanı eşleştirme",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Analiz motoru iletişim bilgileri, deneyim, eğitim, beceriler, özet, ölçülebilir başarılar, içerik kapsamı ve eylem odaklı dil olmak üzere sekiz kategoriyi değerlendirir. Tek bir puan vermekle kalmaz; kategori sonuçlarını ve düzenleme önerilerini de gösterir. Kullanıcı metni düzenleyebilir, özgün metne dönebilir ve sonucu dışa aktarabilir."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "İş ilanındaki desteklenen terimler üzerinden bulunan ve eksik becerileri karşılaştırır.",
+                                        "İlan ekran görüntülerinden Türkçe ve İngilizce OCR ile metin çıkarır; çıkarılan metin düzenlenebilir.",
+                                        "PDF, DOCX ve TXT dosyaları tarayıcıda okunur; özgün dosyalar sunucuya yüklenmez."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Belge ve portfolyo oluşturma",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Canlı önizlemeli CV oluşturucu, tek ve çift sütunlu 25 şablonu ortak bir düzenleme akışında sunar. Belge başlıkları Türkçe veya İngilizce seçilebilir; canlı puanlama, yerel taslaklar ve revizyon geçmişi düzenleme sürecini destekler. Tarayıcıdan PDF çıktısı alınabilir. Ön yazı aracı düzenlenebilir taslaklar ve metin/PDF dışa aktarımı sağlar."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Portfolyo oluşturucuda 18 tasarım, profil fotoğrafı, yazı tipi ve renk kontrolleri bulunur.",
+                                        "Portfolyo bağımsız HTML olarak indirilebilir veya kullanıcı tercihiyle herkese açık yayınlanıp yayından kaldırılabilir.",
+                                        "İsteğe bağlı hesaplarda belge kopyalama, sürüm geçmişi ve eski sürümü geri yükleme desteklenir."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Nasıl inşa edildi",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Sunucu tarafı Laravel 12 ve PHP ile, arayüz Blade, yerel CSS ve JavaScript ES modülleriyle hazırlanmıştır. Three.js açılıştaki etkileşimli CV stüdyosunu oluşturur; PDF.js, Mammoth ve Tesseract.js belge okuma ve OCR görevlerini üstlenir. Yerel kurulum SQLite kullanır; Vercel yapılandırmasında kalıcı Neon PostgreSQL bulunur. Ön yüz için ayrı bir derleme adımı gerekmez."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Etkileşim ve erişilebilirlik",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Üç sahne modu olan 3B stüdyo; işaretçi, dokunmatik ve klavye kontrollerini, duraklatma/devam etme davranışını ve kaydırma koreografisini birleştirir. Azaltılmış hareket tercihi desteklenir. Chrome ve Edge için Manifest V3 eklentisi, kullanıcı tarafından incelenen ilan metnini CVera’ya taşır; metin aktarımı URL sorgusu yerine fragment üzerinden yapılır."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Veri akışı ve yapay zekâ",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Analiz için çıkarılan metin Laravel’e gönderilir, ancak analiz uç noktası tarafından kaydedilmez. Yerel taslak ve bulut kayıtları kullanıcının açık işlemleriyle oluşturulur. Bulut belgeleri sahibine göre sınırlandırılır; JSON istekleri CSRF koruması, analiz ve AI uç noktaları ayrı IP bazlı hız sınırları kullanır. İsteğe bağlı AI sağlayıcısının anahtarları sunucuda kalır; üretilen içerik uygulanmadan önce kullanıcı incelemesi gerekir."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Önemli kararlar ve sınırlar",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "ATS puanı açıklanabilir bir içerik sezgisidir; bir işverenin ATS sonucunu veya mülakat garantisini temsil etmez. Desteklenen ilanlarda genel içerik %65, terim örtüşmesi %35 ağırlık taşır. Belge yerleşimi ve gerçek ATS ayrıştırması ölçülmez; OCR hataları düzeltilebilir. AI yapılandırılmadığında sahte yanıt üretilmez, araç kullanılamadığını bildirir. Eklenti mağaza yayını ve üretim e-posta akışları README’de yapılandırılmamış olarak belirtilmiştir."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Kalite ve doğrulama",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Depodaki PHPUnit testleri puanlama, doğrulama, kullanıcı izolasyonu, revizyon geri yükleme, yayınlama ve API hız sınırlarını kapsar. Playwright senaryoları masaüstü/mobil görünümü, gerçek WebGL başlatmayı, belge içe aktarmayı, OCR’ı, şablon değişikliklerini, indirmeleri ve azaltılmış hareketi kontrol eder. AI sağlayıcı testleri taklit yanıtlarla yürütülür; canlı sağlayıcı ve tarayıcı mağazası kurulumu bu kapsamın dışındadır."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "en": {
                     "name": "CVera",
                     "summary": "A workspace for CV analysis, job matching and portfolio building",
                     "description": "CVera combines explainable ATS checks, job-specific skill comparison, OCR and a live-preview CV builder. It offers PDF export, cover letters, 25 CV templates and 18 portfolio designs. Core tools work without registration; optional accounts store documents and revision history.",
-                    "highlights": []
+                    "highlights": [
+                        "Explainable CV analysis across eight categories and job matching",
+                        "25 CV templates, 18 portfolio designs and PDF/HTML exports",
+                        "Browser document import, OCR and optional cloud revision history"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Overview",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "CVera brings the preparation of a job application into one workspace: reviewing a CV, comparing it with an advert, building documents, writing a cover letter and publishing a personal portfolio. Core tools work without registration. Optional accounts add cloud documents and revision history. The product has no subscriptions, premium tiers or paid template locks."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "CV analysis and job matching",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The analysis engine evaluates eight categories: contact details, experience, education, skills, summary, measurable achievements, content scope and action-oriented language. Category scores and actionable recommendations explain the result. Users can edit extracted text, restore the original and export their changes."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Job comparison identifies supported skills found in or missing from the CV.",
+                                        "Turkish and English OCR reads job screenshots and allows corrections before comparison.",
+                                        "PDF, DOCX and TXT imports run in the browser; original files are not uploaded."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Document and portfolio tools",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The CV builder combines live preview and scoring with 25 single- and two-column templates. Turkish and English document headings, local drafts and local revision history support repeated editing. Browser PDF output keeps the document export in the same workflow. Cover letters remain editable and can be exported as text or PDF."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "The portfolio builder offers 18 designs, profile photos and font/color controls.",
+                                        "Portfolios can be downloaded as standalone HTML or explicitly published and unpublished.",
+                                        "Optional accounts support document duplication, cloud revisions and restoration."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "How it is built",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Laravel 12 and PHP handle the server, with Blade, native CSS and JavaScript ES modules for the interface. Three.js powers the interactive CV studio; PDF.js, Mammoth and Tesseract.js handle document extraction and OCR. Local setup uses SQLite, while the Vercel configuration uses persistent Neon PostgreSQL. The frontend needs no separate compilation step."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Interaction and accessibility",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The three-mode 3D studio combines pointer, touch and keyboard controls with pause/resume, scroll choreography and reduced-motion support. A Chrome/Edge Manifest V3 extension transfers a user-reviewed job description into the workspace. It requests activeTab, scripting and storage permissions, and transfers text through a URL fragment rather than a query string."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Data flow and optional AI",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Extracted text reaches Laravel for analysis but is not saved by that endpoint. Local drafts and cloud documents are stored on explicit user actions. Cloud operations are scoped to the owner; JSON requests use CSRF protection and analysis/AI routes have separate per-IP rate limits. Optional AI credentials stay on the server and generated content must be reviewed before application."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Decisions and limitations",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The ATS score is an explainable content heuristic, not an employer score or interview guarantee. Supported jobs combine 65% general content and 35% dictionary-term overlap. Document layout and real ATS parsing are not evaluated. OCR output is editable. An unconfigured AI tool reports its unavailability rather than generating a simulated answer. Store publication and production email flows are documented as unconfigured."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Quality and verification",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Repository PHPUnit tests cover scoring, validation, owner isolation, revision restoration, publishing and API limits. Playwright scenarios cover desktop/mobile layouts, real WebGL initialization, document import, OCR, template changes, downloads and reduced motion. Provider tests use mock responses; a live AI provider and browser-store installation are outside that coverage."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "fr": {
                     "name": "CVera",
                     "summary": "Un espace pour analyser un CV et créer un portfolio",
                     "description": "CVera réunit des contrôles ATS explicables, la comparaison des compétences avec une offre, la reconnaissance de texte et un éditeur de CV avec aperçu. Il propose un export PDF, des lettres de motivation, 25 modèles de CV et 18 designs de portfolio. Les outils de base fonctionnent sans inscription ; un compte facultatif conserve les documents et leur historique.",
-                    "highlights": []
+                    "highlights": [
+                        "Analyse explicable en huit catégories et comparaison avec une offre",
+                        "25 modèles de CV, 18 portfolios et exports PDF/HTML",
+                        "Import et OCR dans le navigateur, historique cloud facultatif"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Vue d’ensemble",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "CVera rassemble la préparation d’une candidature : analyser un CV, le comparer à une offre, créer un document, rédiger une lettre de motivation et publier un portfolio. Les outils principaux fonctionnent sans inscription. Un compte facultatif permet de conserver les documents et leur historique dans le cloud. Aucun abonnement ni modèle payant ne bloque les fonctionnalités."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Analyse du CV et comparaison",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le moteur évalue huit catégories : coordonnées, expérience, formation, compétences, résumé, résultats mesurables, étendue du contenu et langage orienté vers l’action. Les scores par catégorie et les recommandations expliquent les résultats. Le texte peut être modifié, restauré et exporté."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "La comparaison avec une offre distingue les compétences reconnues présentes et manquantes.",
+                                        "La reconnaissance OCR en turc et en anglais extrait le texte des captures et permet sa correction.",
+                                        "Les fichiers PDF, DOCX et TXT sont lus dans le navigateur ; les originaux ne sont pas envoyés au serveur."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Création de documents et de portfolios",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "L’éditeur de CV propose un aperçu et un score en direct, avec 25 modèles à une ou deux colonnes. Les titres du document peuvent être en turc ou en anglais. Les brouillons locaux et l’historique facilitent les révisions ; le navigateur produit le PDF. Les lettres de motivation sont modifiables et exportables en texte ou PDF."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Le portfolio offre 18 designs, une photo de profil et des réglages de police et de couleur.",
+                                        "Un export HTML autonome complète la publication publique et le retrait explicites.",
+                                        "Les comptes facultatifs permettent la duplication et la restauration des versions cloud."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Architecture technique",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Laravel 12 et PHP assurent le serveur ; Blade, CSS natif et modules JavaScript construisent l’interface. Three.js anime le studio de CV. PDF.js, Mammoth et Tesseract.js traitent les documents et l’OCR. SQLite sert au lancement local, tandis que la configuration Vercel utilise Neon PostgreSQL persistant. Aucune compilation séparée du frontend n’est nécessaire."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Interaction et accessibilité",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le studio 3D comporte trois modes, des commandes au pointeur, au clavier et au toucher, ainsi que pause/reprise et réduction des animations. Une extension Chrome/Edge Manifest V3 transfère une offre relue par l’utilisateur. Elle demande activeTab, scripting et storage ; le texte passe par un fragment d’URL plutôt que par une chaîne de requête."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Données et IA facultative",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le texte extrait est analysé par Laravel sans être conservé par cet endpoint. Les brouillons et documents cloud sont enregistrés sur action explicite. Les opérations cloud sont limitées au propriétaire, les requêtes JSON utilisent CSRF et les routes d’analyse et d’IA ont des limites IP distinctes. Les clés IA restent sur le serveur et le contenu généré doit être relu avant application."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Choix et limites",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le score ATS est une heuristique explicable du contenu, sans garantir un résultat employeur ni un entretien. Pour les offres reconnues, il combine 65 % de contenu général et 35 % de correspondance de termes. Il ne mesure pas la mise en page ni un véritable parseur ATS. L’OCR est corrigeable et l’IA non configurée signale son indisponibilité. La publication en magasin et les e-mails de production restent non configurés dans la documentation."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Qualité et vérification",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Les tests PHPUnit du dépôt couvrent le score, la validation, l’isolation des propriétaires, la restauration, la publication et les limites API. Playwright couvre les vues desktop/mobile, WebGL réel, les imports, l’OCR, les changements de modèle, les téléchargements et la réduction des animations. Les tests IA utilisent des réponses simulées ; aucun fournisseur actif ni installation depuis un magasin n’est testé."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "de": {
                     "name": "CVera",
                     "summary": "Ein Arbeitsbereich für Lebenslaufanalyse und Portfolios",
                     "description": "CVera verbindet nachvollziehbare ATS-Prüfungen, den Kompetenzvergleich mit Stellenanzeigen, OCR und einen Lebenslaufeditor mit Vorschau. PDF-Export, Anschreiben, 25 Lebenslaufvorlagen und 18 Portfoliodesigns ergänzen die Werkzeuge. Die Grundfunktionen benötigen keine Registrierung; optionale Konten speichern Dokumente und Versionen.",
-                    "highlights": []
+                    "highlights": [
+                        "Nachvollziehbare Analyse in acht Kategorien und Stellenvergleich",
+                        "25 Lebenslaufvorlagen, 18 Portfoliodesigns und PDF/HTML-Export",
+                        "Browserimport, OCR und optionale Cloud-Versionshistorie"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Überblick",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "CVera bündelt die Vorbereitung einer Bewerbung: Lebenslauf prüfen, mit einer Stellenanzeige vergleichen, Dokumente erstellen, ein Anschreiben verfassen und ein Portfolio veröffentlichen. Die Kernwerkzeuge funktionieren ohne Registrierung. Optionale Konten ergänzen Cloud-Dokumente und Versionshistorie. Es gibt keine Abonnements, Premiumstufen oder kostenpflichtig gesperrten Vorlagen."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Lebenslaufanalyse und Stellenvergleich",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Die Analyse bewertet acht Kategorien: Kontaktdaten, Erfahrung, Ausbildung, Fähigkeiten, Zusammenfassung, messbare Erfolge, Inhaltsumfang und handlungsorientierte Sprache. Einzelwerte und konkrete Empfehlungen machen das Ergebnis nachvollziehbar. Der extrahierte Text lässt sich bearbeiten, wiederherstellen und exportieren."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Der Stellenvergleich zeigt erkannte vorhandene und fehlende Fähigkeiten.",
+                                        "Türkische und englische OCR liest Anzeigenbilder; der Text kann vor dem Vergleich korrigiert werden.",
+                                        "PDF-, DOCX- und TXT-Dateien werden im Browser gelesen; Originaldateien werden nicht hochgeladen."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Dokumente und Portfolios",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Der Lebenslaufeditor verbindet Live-Vorschau und Bewertung mit 25 ein- und zweispaltigen Vorlagen. Türkische oder englische Dokumentüberschriften, lokale Entwürfe und Versionshistorie unterstützen die Bearbeitung. Der Browser erzeugt PDFs. Anschreiben bleiben editierbar und können als Text oder PDF exportiert werden."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Der Portfoliobaukasten bietet 18 Designs, Profilfotos sowie Schrift- und Farbwahl.",
+                                        "Portfolios sind als eigenständiges HTML exportierbar oder ausdrücklich veröffentlichbar und zurückziehbar.",
+                                        "Optionale Konten unterstützen Kopien, Cloud-Versionen und Wiederherstellung."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Technischer Aufbau",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Laravel 12 und PHP bilden den Server, Blade, natives CSS und JavaScript-ES-Module die Oberfläche. Three.js betreibt das interaktive CV-Studio; PDF.js, Mammoth und Tesseract.js übernehmen Dateiauswertung und OCR. Lokal wird SQLite verwendet, die Vercel-Konfiguration nutzt persistentes Neon PostgreSQL. Ein separater Frontend-Build ist nicht erforderlich."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Interaktion und Barrierefreiheit",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Das 3D-Studio bietet drei Modi, Zeiger-, Touch- und Tastatursteuerung, Pause/Fortsetzen und reduzierte Bewegung. Eine Chrome/Edge-Erweiterung nach Manifest V3 überträgt zuvor geprüfte Anzeigen. Sie benötigt activeTab, scripting und storage; der Text wird in einem URL-Fragment statt in Abfrageparametern übertragen."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Datenfluss und optionale KI",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Extrahierter Text wird von Laravel analysiert, aber vom Analyseendpunkt nicht gespeichert. Lokale Entwürfe und Cloud-Dokumente entstehen durch ausdrückliche Benutzeraktionen. Cloud-Zugriffe sind auf den Eigentümer begrenzt; JSON-Anfragen verwenden CSRF-Schutz und Analyse/KI getrennte IP-Limits. KI-Schlüssel bleiben auf dem Server. Generierte Inhalte müssen vor der Anwendung geprüft werden."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Entscheidungen und Grenzen",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Der ATS-Wert ist eine nachvollziehbare Inhaltsheuristik und keine Arbeitgeberbewertung oder Interviewgarantie. Unterstützte Anzeigen kombinieren 65 % allgemeine Inhalte und 35 % Begriffsüberschneidung. Dokumentlayout und echtes ATS-Parsing werden nicht bewertet. OCR-Ergebnisse sind korrigierbar. Ohne KI-Konfiguration wird keine Antwort simuliert. Store-Veröffentlichung und produktive E-Mail-Abläufe sind laut Dokumentation nicht eingerichtet."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Qualität und Prüfung",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Die PHPUnit-Tests im Repository prüfen Bewertung, Validierung, Eigentümerisolation, Versionswiederherstellung, Veröffentlichung und API-Limits. Playwright deckt Desktop/Mobilansichten, echtes WebGL, Dokumentimport, OCR, Vorlagenwechsel, Downloads und reduzierte Bewegung ab. KI-Tests verwenden Mock-Antworten; ein aktiver Anbieter und eine Store-Installation gehören nicht zum Prüfumfang."
+                                }
+                            ]
+                        }
+                    ]
                 }
             }
         },
@@ -63,25 +439,369 @@
                     "name": "MERIDIAN",
                     "summary": "Kaydırmayla ilerleyen, etkileşimli bir 3B uzay yolculuğu",
                     "description": "MERIDIAN, yörünge oluşumlarını ve bir uzay aracını sinematik kamera geçişleriyle keşfettiren bir havacılık ve uzay konsept sitesidir. Üç yörünge oluşumu seçilebilir; radyatör, kenetlenme halkası ve ana gövde ayrı ayrı incelenebilir. Klavye, dokunmatik kontrol ve azaltılmış hareket tercihi desteklenir.",
-                    "highlights": []
+                    "highlights": [
+                        "Kaydırma anlatısıyla bütünleşen sürekli 3B sahne",
+                        "Üç yörünge oluşumu ve ayrı uzay aracı bileşenlerini inceleme",
+                        "Klavye, dokunmatik ve azaltılmış hareket desteği"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Genel bakış",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "MERIDIAN, bir havacılık ve uzay konseptini yalnızca anlatmak yerine ziyaretçiye keşfettiren etkileşimli bir web deneyimidir. Kaydırma boyunca metin, 3B sahne ve kamera hareketleri birlikte ilerler. Yolculuk; kalkış, manifesto, yörünge sistemleri, zaman çizelgesi, teknoloji, uzay aracı, istatistikler, hikâyeler ve dönüş bölümlerinden oluşur. Aynı sahne, anlatının farklı aşamalarına görsel süreklilik kazandırır."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Yörünge sistemlerini keşfetme",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "ORBIT 01, 02 ve 03 kontrolleri farklı yörünge oluşumlarını seçilebilir hale getirir. Seçim, ilgili oluşumu ayırır ve açıklamasını gösterir; kullanıcı böylece otomatik ilerleyen anlatının içindeki bir yapıyı daha yakından inceleyebilir. İnceleme modu ile kaydırma turu aynı deneyimin parçalarıdır."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Aynı öğeye tekrar basmak seçimi temizler.",
+                                        "Resume Journey, mevcut kaydırma konumundan tura geri döndürür.",
+                                        "Kontroller hem dokunmatik kullanım hem de klavye etkileşimi için hazırlanmıştır."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Uzay aracı incelemesi",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Radyatör dizisi, kenetlenme halkası ve ana gövde ayrı ayrı seçilebilir. Kamera, inceleme sırasında uzay aracının dışından geçen bir yay izler; seçilen parça hafifçe ayrılarak yapının okunmasını kolaylaştırır. Bu geçişler, teknik bileşenleri düz bir özellik listesinden çıkarıp mekânsal olarak anlaşılabilen bir sunuma dönüştürür."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Nasıl inşa edildi",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Uygulama Next.js 16 App Router, React 19 ve TypeScript üzerine kuruludur. Three.js, React Three Fiber ve Drei 3B sahne, geometri ve kamera katmanını oluşturur; postprocessing görsel efektleri tamamlar. GSAP, Lenis ve Framer Motion kaydırma ve arayüz hareketlerinde kullanılır. Zustand ortak uygulama durumunu, CSS ve Tailwind CSS 4 görünümü yönetir."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Mimari ve içerik ayrımı",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Sahne, kamera, geometri ve efekt kodu canvas bileşenlerinde; bölüm içerikleri ve inceleme kontrolleri sections katmanında tutulur. Ortak arayüz öğeleri ayrı bir UI katmanındadır. Metinler ve inceleme açıklamaları data dizininde, ortak davranışlar hooks ve lib katmanlarında, durum ise store içinde düzenlenmiştir. Shader kaynakları ve stiller de içerikten ayrı tutulur."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Hareket ve erişilebilirlik",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "İnceleme kontrolleri klavye ve dokunmatik girişle kullanılabilir. Azaltılmış hareket tercihi etkin olduğunda inceleme görünümleri mekânsal animasyon olmadan değiştirilir. Masaüstü ve mobil için ayrı ekran görüntüleri bulunur; bu görseller gerçek 3B sahneyi içerir. Görsel regresyon testlerinde ise dinamik canvas maskelenerek sayfa düzeninin daha kararlı karşılaştırılması sağlanır."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Kalite ve doğrulama",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "README’deki doğrulama kaydı; 44 etkileşim kontrolünün geçtiğini, 4 beklenen atlama bulunduğunu ve dört görsel yapılandırmada toplam 40 bölüm referansının doğrulandığını belirtir. Playwright masaüstü, mobil ve her ikisinin azaltılmış hareket sürümleriyle çalışır. ESLint, TypeScript ve üretim derlemesi kontrolleri de iş akışının parçasıdır; bunlar depoda belgelenen revizyona ait sonuçlardır."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Çalıştırma ve kapsam",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Mevcut proje, dış servis kimlik bilgileri veya ortam değişkenleri gerektirmeyen bir ön yüz deneyimidir. Yerel geliştirme ve üretim sunucusu pnpm komutlarıyla çalıştırılır. MERIDIAN’ın kapsamı, etkileşimli bir uzay konseptini sahnelemek ve inceleme deneyimi sunmaktır; hesap, rezervasyon veya ticari işlem akışı içerdiği iddia edilmez."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "en": {
                     "name": "MERIDIAN",
                     "summary": "An interactive, scroll-driven 3D journey through space",
                     "description": "MERIDIAN is an aerospace concept website with cinematic camera transitions through orbital formations and a spacecraft. Visitors can select three orbital formations and inspect the radiator array, docking ring and main bus individually. Keyboard, touch and reduced-motion preferences are supported.",
-                    "highlights": []
+                    "highlights": [
+                        "Continuous 3D scene integrated with a scroll-led narrative",
+                        "Three orbital formations and individual spacecraft inspections",
+                        "Keyboard, touch and reduced-motion support"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Overview",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "MERIDIAN presents an aerospace concept as an explorable web experience. Text, a continuous 3D scene and camera motion advance together as the visitor scrolls. The journey connects departure, manifesto, orbital systems, timeline, technology, spacecraft, statistics, stories and return. Reusing the scene across these stages gives the narrative a consistent spatial setting."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Exploring orbital systems",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "ORBIT 01, 02 and 03 isolate selectable formations and show their descriptions. Visitors can pause the scroll-led story to inspect a structure in context. Inspection and the guided journey share the same experience rather than requiring a separate destination."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Selecting the same item again clears its selection.",
+                                        "Resume Journey returns to the tour at the current scroll position.",
+                                        "Controls support keyboard interaction and touch input."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Spacecraft inspection",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The radiator array, docking ring and main bus can be inspected individually. Camera transitions follow an external arc around the spacecraft, while the chosen component separates slightly. This makes the construction easier to read spatially and turns a technical component list into a direct exploration of the object."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "How it is built",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Next.js 16 App Router, React 19 and TypeScript form the application layer. Three.js, React Three Fiber and Drei implement the scene, geometry and camera; postprocessing adds effects. GSAP, Lenis and Framer Motion support scroll and interface motion. Zustand holds shared application state, while CSS and Tailwind CSS 4 provide styling."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Architecture and content",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Canvas components contain scene, camera, geometry and effects. Section components own the narrative sections and inspection controls, with shared interface elements in a separate UI layer. Copy and inspection descriptions live in data, shared behavior in hooks/lib and state in store. Shader sources and styles remain separate from editorial content."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Motion and accessibility",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Inspection controls work with keyboard and touch. Reduced-motion preferences switch inspection views without spatial animation. Desktop and mobile screenshots capture the actual 3D scene. Visual regression snapshots deliberately hide dynamic canvas content so layout changes can be compared against stable references."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Quality and verification",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The repository README records 44 passing interaction checks, four expected skips and 40 section baselines across four visual configurations. Playwright covers desktop, mobile and reduced-motion versions of both. ESLint, TypeScript and production builds are also part of verification. These are documented results for the repository’s verified revision, rather than newly executed checks of the project here."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Running and scope",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The current frontend requires no environment variables or external service credentials. pnpm commands start development, create the production build and serve it. Its scope is an interactive aerospace concept and inspection experience; the presentation does not imply an account, reservation or commerce backend."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "fr": {
                     "name": "MERIDIAN",
                     "summary": "Un voyage spatial 3D interactif au fil du défilement",
                     "description": "MERIDIAN est un site conceptuel aérospatial avec des transitions de caméra cinématographiques. Trois formations orbitales peuvent être sélectionnées ; les radiateurs, l’anneau d’amarrage et le corps principal du véhicule peuvent être inspectés séparément. Le clavier, le tactile et la réduction des animations sont pris en charge.",
-                    "highlights": []
+                    "highlights": [
+                        "Scène 3D continue intégrée au récit défilant",
+                        "Trois formations orbitales et inspection des composants",
+                        "Clavier, tactile et réduction des animations"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Vue d’ensemble",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "MERIDIAN transforme un concept aérospatial en expérience web à explorer. Texte, scène 3D et caméra progressent ensemble au défilement. Le parcours relie départ, manifeste, systèmes orbitaux, chronologie, technologie, véhicule spatial, statistiques, récits et retour. La continuité de la scène donne un cadre spatial commun aux étapes de la narration."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Explorer les systèmes orbitaux",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "ORBIT 01, 02 et 03 permettent d’isoler une formation et d’en lire la description. Le visiteur interrompt le parcours guidé pour examiner un objet dans son contexte. Le mode d’inspection reste intégré à la même expérience."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Sélectionner de nouveau le même élément annule la sélection.",
+                                        "Resume Journey reprend le parcours à la position de défilement actuelle.",
+                                        "Les contrôles sont utilisables au clavier et au toucher."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Inspection du véhicule spatial",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Les radiateurs, l’anneau d’amarrage et le corps principal se sélectionnent séparément. La caméra suit un arc extérieur autour du véhicule ; le composant choisi s’écarte légèrement. La présentation rend ainsi la construction plus lisible dans l’espace et remplace une simple liste technique par une exploration directe de l’objet."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Architecture technique",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Next.js 16 App Router, React 19 et TypeScript constituent l’application. Three.js, React Three Fiber et Drei gèrent scène, géométrie et caméra ; le postprocessing complète les effets. GSAP, Lenis et Framer Motion animent le défilement et l’interface. Zustand partage l’état, avec CSS et Tailwind CSS 4 pour la présentation."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Organisation du contenu",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Les composants canvas regroupent scène, caméra, géométrie et effets. Les sections possèdent le récit et les contrôles d’inspection ; les éléments communs disposent d’une couche UI. Les textes et descriptions sont dans data, les comportements dans hooks/lib et l’état dans store. Les shaders et styles sont séparés du contenu éditorial."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Mouvement et accessibilité",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le clavier et le tactile permettent d’utiliser les inspections. La préférence de réduction des animations supprime les transitions spatiales entre les vues. Les captures desktop et mobile montrent la véritable scène 3D. Les références de régression visuelle masquent au contraire le canvas dynamique pour comparer la mise en page de manière stable."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Qualité et vérification",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le README consigne 44 contrôles d’interaction réussis, quatre omissions attendues et 40 références de sections dans quatre configurations visuelles. Playwright couvre desktop, mobile et leurs versions à mouvement réduit. ESLint, TypeScript et la compilation de production complètent les contrôles. Ces résultats concernent la révision vérifiée documentée dans le dépôt."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Exécution et périmètre",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le frontend actuel ne demande ni variables d’environnement ni identifiants de services externes. pnpm lance le développement, compile et sert la production. Le projet présente un concept aérospatial interactif et son exploration ; il ne revendique pas de backend de comptes, de réservation ou de commerce."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "de": {
                     "name": "MERIDIAN",
                     "summary": "Eine interaktive 3D-Weltraumreise beim Scrollen",
                     "description": "MERIDIAN ist eine Aerospace-Konzeptwebsite mit filmischen Kamerafahrten durch Orbitalformationen und ein Raumfahrzeug. Drei Formationen lassen sich auswählen; Radiatoren, Andockring und Hauptkörper können einzeln untersucht werden. Tastatur, Touch und reduzierte Bewegung werden unterstützt.",
-                    "highlights": []
+                    "highlights": [
+                        "Kontinuierliche 3D-Szene mit Scroll-Erzählung",
+                        "Drei Orbitalformationen und einzelne Bauteilinspektionen",
+                        "Tastatur, Touch und reduzierte Bewegung"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Überblick",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "MERIDIAN macht ein Aerospace-Konzept als Website erkundbar. Text, kontinuierliche 3D-Szene und Kamerabewegung entwickeln sich gemeinsam beim Scrollen. Die Reise verbindet Abflug, Manifest, Orbitalsysteme, Zeitachse, Technologie, Raumfahrzeug, Statistiken, Geschichten und Rückkehr. Die wiederkehrende Szene gibt den Kapiteln einen zusammenhängenden räumlichen Rahmen."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Orbitalsysteme erkunden",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "ORBIT 01, 02 und 03 isolieren auswählbare Formationen und zeigen ihre Beschreibungen. Besucher können die geführte Erzählung unterbrechen und eine Struktur im Zusammenhang untersuchen. Inspektion und Scrollreise bleiben Teil derselben Oberfläche."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Eine erneute Auswahl desselben Objekts hebt die Auswahl auf.",
+                                        "Resume Journey setzt die Reise an der aktuellen Scrollposition fort.",
+                                        "Die Steuerung unterstützt Tastatur und Touch."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Raumfahrzeug untersuchen",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Radiatoren, Andockring und Hauptkörper lassen sich einzeln auswählen. Die Kamera bewegt sich auf einem äußeren Bogen um das Raumfahrzeug; das gewählte Teil löst sich leicht aus der Struktur. Dadurch wird die Konstruktion räumlich lesbar und eine technische Komponentenliste zu einer unmittelbaren Erkundung."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Technischer Aufbau",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Next.js 16 App Router, React 19 und TypeScript bilden die Anwendung. Three.js, React Three Fiber und Drei verwalten Szene, Geometrie und Kamera; Postprocessing ergänzt Effekte. GSAP, Lenis und Framer Motion steuern Scroll- und Oberflächenbewegung. Zustand hält gemeinsamen Zustand, CSS und Tailwind CSS 4 gestalten die Darstellung."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Architektur und Inhalte",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Canvas-Komponenten enthalten Szene, Kamera, Geometrie und Effekte. Sections organisieren Erzählabschnitte und Inspektionssteuerung; gemeinsame Bedienelemente liegen in einer UI-Schicht. Texte und Beschreibungen befinden sich in data, Verhalten in hooks/lib und Zustand in store. Shaderquellen und Stile sind vom redaktionellen Inhalt getrennt."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Bewegung und Barrierefreiheit",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Inspektionen sind mit Tastatur und Touch bedienbar. Bei reduzierter Bewegung wechseln Ansichten ohne räumliche Animation. Desktop- und Mobilaufnahmen zeigen die tatsächliche 3D-Szene. Visuelle Regressionstests blenden dynamischen Canvas-Inhalt aus, damit Layoutänderungen mit stabilen Referenzen verglichen werden können."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Qualität und Prüfung",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Das README dokumentiert 44 erfolgreiche Interaktionsprüfungen, vier erwartete übersprungene Fälle und 40 Abschnittsreferenzen über vier visuelle Konfigurationen. Playwright prüft Desktop, Mobil und beide mit reduzierter Bewegung. ESLint, TypeScript und Produktionsbuild ergänzen die Prüfung. Die Zahlen beziehen sich auf die im Repository dokumentierte verifizierte Revision."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Betrieb und Umfang",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Das aktuelle Frontend benötigt weder Umgebungsvariablen noch Zugangsdaten externer Dienste. pnpm startet Entwicklung, erstellt den Build und betreibt die Produktion. Der Umfang ist eine interaktive Aerospace-Präsentation mit Inspektion; ein Konto-, Buchungs- oder Commerce-Backend wird damit nicht behauptet."
+                                }
+                            ]
+                        }
+                    ]
                 }
             }
         },
@@ -106,25 +826,401 @@
                     "name": "LearnToPoker",
                     "summary": "Sanal fişlerle poker kurallarını öğreten etkileşimli eğitim uygulaması",
                     "description": "KUMAR KÖTÜDÜR. OYNAMAYIN. Kumar bağımlılığa, maddi kayıplara ve ilişkilerin zarar görmesine yol açabilir. LearnToPoker, gerçek para içermeyen bir eğitim projesidir. Türkçe ve İngilizce dersler, el sıralamaları, 11 varyant, sınavlar ve açıklamalı örnek eller içerir. Dört oyun türünde botlara karşı sanal fişlerle pratik yapılır; 3B masa ve olasılık açıklamaları kararların nasıl işlediğini gösterir.",
-                    "highlights": []
+                    "highlights": [
+                        "Türkçe/İngilizce dersler, 11 varyant ve 85 terimlik sözlük",
+                        "Gerçek para olmadan dört varyantta sanal fişlerle pratik",
+                        "Bağımsız oyun motoru, açıklamalı koç ve 3B/2B masa"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Genel bakış",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "LearnToPoker, kart destesinden masa başındaki kararların mantığına kadar ilerleyen Türkçe ve İngilizce bir eğitim uygulamasıdır. Öğrenme akışı; temel kavramları anlama, örnek elleri inceleme, sınavlarla bilgiyi kontrol etme ve sanal fişlerle pratik yapma adımlarından oluşur. Projede gerçek parayla oyun bulunmaz. Kumar bağımlılığa, maddi kayıplara ve ilişkilerin zarar görmesine yol açabilir; uygulamanın amacı kuralları ve olasılıkları eğitim bağlamında açıklamaktır."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Dersler ve örnek eller",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Temel ders; deste ve renkler, el sıralamaları, fold/check/call/bet/raise/all-in işlemleri, blind, ante, pot ve masa pozisyonunu görsel örneklerle açıklar. Açılabilir el sıralaması merdiveni örnekleri ve olasılıkları birlikte sunar. Sekiz soruluk temel sınav, sonraki bölüme geçmeden önce kavramları pekiştirir."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "11 varyant için kural farkları, pratik açıklamalar ve beş soruluk sınavlar bulunur.",
+                                        "Varyantlar aileye veya simülatör desteğine göre filtrelenebilir.",
+                                        "Örnek el oynatıcısı otomatik ilerleme, önceki/sonraki adım, yeniden başlatma ve klavye oklarıyla gezinmeyi destekler."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Sanal fişli simülatör",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Texas Hold’em, Omaha, Five-Card Draw ve Seven-Card Stud, iki ila beş bota karşı oynanabilir. Başlangıçta 500, 1.000 veya 2.000 sanal fiş seçilir. Adım modu her hareketi ayrı incelemeyi sağlar; otomatik mod botları ve dağıtımı yönetirken kullanıcının kararını bekler. Bot kişilikleri sıkı, dengeli, gevşek ve çok agresif davranışları temsil eder."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "İşlem çubuğu yalnızca geçerli kararları ve oyun limitlerine uygun miktarları sunar.",
+                                        "Five-Card Draw’da değiştirilecek kartlar seçilebilir.",
+                                        "Oyun günlüğü, el özeti ve değerlendirme notları yaşananları açıklar; 3B masa kartları, fişleri ve ödemeleri gösterir."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Olasılık açıklamaları ve oyun motoru",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Koç katmanı Monte Carlo ile tahmini kazanma payını, pot odds bilgisini, öneriyi ve gerekçelerini gösterir. Çatı bağımsız JavaScript motoru; el değerlendirmeyi, bahis turlarını, minimum artırmayı, kısa all-in sonrası yeniden açılmayı, yan potları ve karşılanmamış bahis iadelerini yönetir. Omaha’nın iki kapalı ve üç ortak kart kullanma kuralı gibi varyant ayrımları motor seviyesinde uygulanır."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Teknik mimari",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "React 18, React Router ve Vite uygulama kabuğunu; Three.js, React Three Fiber ve Drei 3B sunumu oluşturur. Framer Motion arayüz hareketlerini, Zustand oyun ve hareket durumunu, i18next iki dilde içerikleri yönetir. Oyun motorunun React bağımlılığı yoktur; gameStore arayüzle motor arasında köprü kurar. Açılış sayfası doğrudan yüklenir, diğer sayfalar Suspense içinde tembel yüklenir."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Görsel deneyim ve erişilebilirlik",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Açılıştaki kartlar yelpaze, atlıkarınca, şelale, karıştırma, saçılma ve helis olmak üzere altı oluşum arasında geçer. WebGL kullanılamadığında CSS kart yelpazesi ve 2B masa alternatifleri bulunur. Auto/On/Off hareket tercihi kaydedilir ve CSS, arayüz ve 3B kod tarafından paylaşılır. Ekran okuyucu masa metni, etiketli kontroller, klavye gezinmesi ve kurulum penceresinde odak yönetimi desteklenir."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "İçerik kapsamı ve sınırlar",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Aranabilir sözlük, Türkçe ve İngilizce karşılıklarıyla 85 terim içerir. Derslerde 11 varyant anlatılır, simülatörde ise dört varyant oynanabilir. Düşük el değerlendiricilerinin varlığı ilgili varyantların tamamının oynanabilir olduğu anlamına gelmez. Monte Carlo hesabı gizli kartları örnekler; rakip aralıklarını çıkarmaz ve draw oyunlarında gelecekteki kart değişimlerini simüle etmez. Dikey telefon masa düzeni geliştirmeleri yol haritasındadır."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Kalite ve doğrulama",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "README’de Vitest kapsamı 65 motor ve dört kart oluşumu senaryosu olmak üzere 69 test olarak belgelenmiştir. Rastgele geçerli kararlarla dört varyantta toplam 800 el oynatan fuzz testleri; fiş korunumu, negatif olmayan bakiyeler, benzersiz kartlar, geçerli sıra ve ödeme toplamlarını denetler. Oluşum testleri konumların sonlu ve sınırlar içinde kalmasını kontrol eder. Bu sayılar depodaki test kapsamını anlatır; burada motor testlerinin yeniden çalıştırıldığı iddia edilmez."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "en": {
                     "name": "LearnToPoker",
                     "summary": "Interactive poker lessons and practice with virtual chips",
                     "description": "GAMBLING IS HARMFUL. DO NOT GAMBLE. Gambling can cause addiction, financial losses and damage to relationships. LearnToPoker is an educational project with no real-money play. Turkish and English lessons cover hand rankings, 11 variants, quizzes and illustrated sample hands. Four playable variants use virtual chips against bots, with a 3D table and explanations of probabilities and decisions.",
-                    "highlights": []
+                    "highlights": [
+                        "Turkish/English lessons, eleven variants and an 85-term glossary",
+                        "Four virtual-chip practice variants with no real-money play",
+                        "Independent game engine, explanatory coaching and 3D/2D tables"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Overview",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "LearnToPoker is a Turkish/English educational application that progresses from understanding a deck to explaining decisions at a table. Its path connects basic concepts, illustrated hands, quizzes and practice with virtual chips. There is no real-money play. Gambling can cause addiction, financial loss and damage to relationships; this project presents rules and probabilities in an educational context."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Lessons and sample hands",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The basics lesson explains suits, hand rankings, fold/check/call/bet/raise/all-in, blinds, antes, pots and table position through visual examples. An expandable ranking ladder pairs hands with probabilities. An eight-question quiz reinforces the foundation before moving on."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Eleven variants include rule differences, practical explanations and five-question quizzes.",
+                                        "Lessons can be filtered by family or simulator availability.",
+                                        "Sample-hand playback supports autoplay, previous/next, restart, direct step selection and arrow keys."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Virtual-chip simulator",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Texas Hold’em, Omaha, Five-Card Draw and Seven-Card Stud are playable against two to five bots. Starting stacks contain 500, 1,000 or 2,000 virtual chips. Step mode exposes individual actions; automatic mode handles bots and dealing while waiting for the user. Bot personalities represent tight, balanced, loose and very aggressive behavior."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "The action bar offers legal decisions and sizes that respect the variant’s limits.",
+                                        "Five-Card Draw supports choosing discards or keeping the hand.",
+                                        "A game log, summaries and review notes explain the hand; the 3D table shows cards, stacks and payouts."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Probability explanations and engine",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The coaching layer presents Monte Carlo equity, pot odds, a suggestion and its reasons. Framework-free JavaScript implements evaluation, betting rounds, minimum raises, short-all-in reopening, side pots and uncalled-bet refunds. Variant constraints such as Omaha’s exactly two hole cards and three board cards are enforced in the engine."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Technical architecture",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "React 18, React Router and Vite form the application shell. Three.js, React Three Fiber and Drei render the 3D presentation. Framer Motion handles interface motion, Zustand stores game/motion state and i18next supplies both languages. The engine has no React dependency; gameStore bridges its actions to the UI. Landing loads eagerly and other routes load lazily inside Suspense."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Visual experience and accessibility",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The hero cycles through fan, carousel, waterfall, shuffle, scatter and helix formations. CSS cards and a 2D table provide alternatives when WebGL is unavailable. Auto/On/Off motion preferences are saved and shared across CSS, interface transitions and 3D code. Screen-reader table text, labelled controls, keyboard navigation and setup-dialog focus management support access."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Content and limitations",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "A searchable glossary contains 85 terms with Turkish/English entries. Eleven variants have lessons and four have playable simulators. Low-hand evaluators do not imply that every related variant is playable. Equity samples hidden holdings rather than inferring opponent ranges, and does not simulate future draw exchanges. More comfortable portrait-phone table layouts are on the roadmap."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Quality and verification",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The README documents 69 Vitest cases: 65 engine cases and four formation cases. Fuzz tests play 800 hands across four variants using random legal decisions, checking chip conservation, nonnegative stacks, unique cards, turn validity and payout totals. Formation tests check finite, bounded positions. These figures describe checked-in coverage, not a new execution of those engine tests here."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "fr": {
                     "name": "LearnToPoker",
                     "summary": "Des leçons de poker interactives avec des jetons virtuels",
                     "description": "LES JEUX D’ARGENT SONT NOCIFS. NE JOUEZ PAS D’ARGENT. Ils peuvent entraîner une dépendance, des pertes financières et nuire aux relations. LearnToPoker est un projet pédagogique sans argent réel. Les leçons en turc et en anglais présentent les combinaisons, 11 variantes, des quiz et des exemples commentés. Quatre variantes permettent de pratiquer contre des bots avec des jetons virtuels et une table 3D.",
-                    "highlights": []
+                    "highlights": [
+                        "Leçons bilingues, onze variantes et glossaire de 85 termes",
+                        "Quatre variantes avec jetons virtuels, sans argent réel",
+                        "Moteur indépendant, coach explicatif et tables 3D/2D"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Vue d’ensemble",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "LearnToPoker est une application pédagogique en turc et en anglais qui va de la compréhension du jeu de cartes à l’explication des décisions à table. Elle associe notions fondamentales, mains illustrées, quiz et exercices avec des jetons virtuels. Aucun argent réel n’est utilisé. Les jeux d’argent peuvent provoquer dépendance, pertes financières et dommages relationnels ; ce projet explique règles et probabilités dans un cadre éducatif."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Leçons et exemples",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "La leçon de base présente couleurs, combinaisons, fold/check/call/bet/raise/all-in, blinds, antes, pot et positions avec des schémas. Une échelle dépliable associe les mains à leurs probabilités. Un quiz de huit questions consolide ces notions."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Onze variantes disposent de règles, différences pratiques et quiz de cinq questions.",
+                                        "Les leçons se filtrent par famille ou disponibilité du simulateur.",
+                                        "Le lecteur de mains propose lecture automatique, étapes précédente/suivante, reprise, sélection directe et flèches du clavier."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Simulateur à jetons virtuels",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Texas Hold’em, Omaha, Five-Card Draw et Seven-Card Stud se pratiquent contre deux à cinq bots. Le départ propose 500, 1 000 ou 2 000 jetons virtuels. Le mode pas à pas expose chaque action ; le mode automatique gère bots et distribution en attendant le joueur. Les profils représentent des styles serré, équilibré, large et très agressif."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "La barre d’actions respecte les décisions légales et les limites de chaque variante.",
+                                        "Five-Card Draw permet de choisir les cartes à remplacer.",
+                                        "Journal, résumés et commentaires expliquent la main ; la table 3D montre cartes, piles et distributions."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Probabilités et moteur",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le coach affiche équité Monte Carlo, cote du pot, suggestion et raisons. Un moteur JavaScript indépendant du framework gère évaluation, tours de mise, relances minimales, réouverture après petit all-in, pots secondaires et remboursements. Les contraintes des variantes, comme les deux cartes privées et trois communes en Omaha, sont appliquées par le moteur."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Architecture technique",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "React 18, React Router et Vite construisent l’application. Three.js, React Three Fiber et Drei assurent la 3D ; Framer Motion anime l’interface. Zustand conserve l’état du jeu et du mouvement, i18next les deux langues. Le moteur ne dépend pas de React ; gameStore relie ses actions à l’interface. La page d’accueil charge directement, les autres routes utilisent Suspense et le chargement différé."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Présentation et accessibilité",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le hero alterne éventail, carrousel, cascade, mélange, dispersion et hélice. Des cartes CSS et une table 2D remplacent WebGL en cas d’indisponibilité. Le choix Auto/On/Off est conservé et partagé entre CSS, transitions et 3D. Texte de table pour lecteur d’écran, contrôles étiquetés, navigation clavier et gestion du focus dans la configuration complètent l’accès."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Contenu et limites",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le glossaire recherchable contient 85 termes bilingues. Onze variantes ont des leçons, mais quatre disposent d’un simulateur. Les évaluateurs de mains basses ne rendent pas toutes les variantes jouables. L’équité échantillonne les cartes cachées sans déduire les ranges adverses et ne simule pas les échanges futurs du draw. L’amélioration de la table en portrait mobile figure dans la feuille de route."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Qualité et vérification",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Le README décrit 69 cas Vitest : 65 pour le moteur et quatre pour les formations. Les tests aléatoires jouent 800 mains dans quatre variantes et contrôlent conservation des jetons, soldes non négatifs, unicité des cartes, tours valides et paiements. Les tests de formations vérifient des positions finies et bornées. Ces chiffres décrivent le dépôt, sans constituer une nouvelle exécution de ses tests ici."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "de": {
                     "name": "LearnToPoker",
                     "summary": "Interaktive Pokerlektionen mit virtuellen Chips",
                     "description": "GLÜCKSSPIEL IST SCHÄDLICH. SPIELEN SIE NICHT UM GELD. Glücksspiel kann abhängig machen, finanzielle Verluste verursachen und Beziehungen schädigen. LearnToPoker ist ein Lernprojekt ohne Echtgeld. Türkische und englische Lektionen behandeln Handrangfolgen, elf Varianten, Quizfragen und kommentierte Beispielhände. Vier Varianten bieten Übungen gegen Bots mit virtuellen Chips und einem 3D-Tisch.",
-                    "highlights": []
+                    "highlights": [
+                        "Zweisprachige Lektionen, elf Varianten und 85 Glossarbegriffe",
+                        "Vier Übungsvarianten mit virtuellen Chips ohne Echtgeld",
+                        "Unabhängiger Motor, erklärendes Coaching und 3D/2D-Tische"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Überblick",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "LearnToPoker ist eine türkisch-englische Lernanwendung vom Verständnis des Kartendecks bis zur Erklärung von Entscheidungen am Tisch. Grundlagen, kommentierte Hände, Quizfragen und Übungen mit virtuellen Chips bilden den Lernpfad. Echtgeld wird nicht eingesetzt. Glücksspiel kann abhängig machen, Geldverluste verursachen und Beziehungen schädigen; das Projekt erklärt Regeln und Wahrscheinlichkeiten im Bildungskontext."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Lektionen und Beispielhände",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Die Grundlagen erklären Farben, Handrangfolgen, fold/check/call/bet/raise/all-in, Blinds, Antes, Pot und Tischposition anhand visueller Beispiele. Eine aufklappbare Rangliste verbindet Hände mit Wahrscheinlichkeiten. Acht Quizfragen festigen die Grundlagen."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Elf Varianten enthalten Regeln, Unterschiede und Quizfragen mit jeweils fünf Aufgaben.",
+                                        "Lektionen lassen sich nach Familie oder Simulatorverfügbarkeit filtern.",
+                                        "Beispielhände unterstützen automatische Wiedergabe, Vor/Zurück, Neustart, direkte Schrittwahl und Pfeiltasten."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Simulator mit virtuellen Chips",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Texas Hold’em, Omaha, Five-Card Draw und Seven-Card Stud lassen sich gegen zwei bis fünf Bots üben. Die Startstapel enthalten 500, 1.000 oder 2.000 virtuelle Chips. Der Schrittmodus zeigt einzelne Aktionen; Automatik übernimmt Bots und Austeilen und wartet auf Benutzerentscheidungen. Botprofile reichen von tight über ausgeglichen und loose bis sehr aggressiv."
+                                },
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Die Aktionsleiste bietet zulässige Entscheidungen und Beträge innerhalb der Variantenlimits.",
+                                        "Five-Card Draw erlaubt die Auswahl auszutauschender Karten.",
+                                        "Protokoll, Handzusammenfassung und Kommentare erklären das Geschehen; der 3D-Tisch zeigt Karten, Stapel und Auszahlungen."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Wahrscheinlichkeiten und Spielmotor",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Die Coaching-Schicht zeigt Monte-Carlo-Equity, Pot Odds, einen Vorschlag und Begründungen. Framework-unabhängiges JavaScript verwaltet Handbewertung, Setzrunden, Mindesterhöhungen, Wiedereröffnung nach kurzen All-ins, Nebenpots und Rückzahlungen nicht mitgegangener Einsätze. Variantenregeln wie genau zwei eigene und drei Gemeinschaftskarten in Omaha werden im Motor umgesetzt."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Technische Architektur",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "React 18, React Router und Vite bilden die Anwendung. Three.js, React Three Fiber und Drei übernehmen 3D, Framer Motion Oberflächenbewegung. Zustand speichert Spiel- und Bewegungszustand, i18next liefert zwei Sprachen. Der Motor hat keine React-Abhängigkeit; gameStore verbindet ihn mit der Oberfläche. Die Startseite lädt direkt, weitere Routen verzögert innerhalb von Suspense."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Darstellung und Barrierefreiheit",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Der Hero wechselt zwischen Fächer, Karussell, Wasserfall, Mischen, Streuen und Helix. CSS-Karten und ein 2D-Tisch ersetzen fehlendes WebGL. Die gespeicherte Bewegungseinstellung Auto/On/Off gilt für CSS, Übergänge und 3D. Screenreader-Tischtext, beschriftete Bedienelemente, Tastaturnavigation und Fokusverwaltung im Einrichtungsdialog unterstützen die Bedienung."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Inhalte und Grenzen",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Das durchsuchbare Glossar enthält 85 zweisprachige Begriffe. Elf Varianten haben Lektionen, vier einen spielbaren Simulator. Low-Hand-Auswerter bedeuten nicht, dass alle entsprechenden Varianten spielbar sind. Equity zieht Stichproben verdeckter Karten, statt gegnerische Ranges abzuleiten, und simuliert keine künftigen Draw-Wechsel. Verbesserungen für Hochformat-Telefone stehen auf der Roadmap."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Qualität und Prüfung",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Das README beschreibt 69 Vitest-Fälle: 65 Motor- und vier Formationstests. Zufallstests spielen 800 Hände über vier Varianten und prüfen Chiperhaltung, nicht negative Stapel, eindeutige Karten, gültige Züge und Auszahlungssummen. Formationstests prüfen endliche, begrenzte Positionen. Diese Zahlen beschreiben die eingecheckten Tests und keine hier erneut ausgeführte Motorprüfung."
+                                }
+                            ]
+                        }
+                    ]
                 }
             }
         },
