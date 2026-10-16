@@ -10,13 +10,32 @@ Personal portfolio of Ayberk Arda, live at **https://ayberkaarda.github.io**. Th
 | --- | --- |
 | ![Home page hero in the dark theme, with the fanned project cards on the right](docs/screenshots/hero-dark.png) | ![Home page hero in the light theme](docs/screenshots/hero-light.png) |
 | ![Projects section in the dark theme, showing project cards in a grid](docs/screenshots/projects-dark.png) | ![Experience section in the light theme](docs/screenshots/experience-light.png) |
-| ![Project detail page for Inertia, showing highlights and detail sections](docs/screenshots/project-detail.png) | ![Local admin panel listing the projects on the site](docs/screenshots/admin-panel.png) |
 
 | Mobile, dark | Mobile, light |
 | --- | --- |
 | <img src="docs/screenshots/mobile-dark.png" width="300" alt="Home page on a 390 px wide phone screen, dark theme"> | <img src="docs/screenshots/mobile-light.png" width="300" alt="Home page on a 390 px wide phone screen, light theme"> |
 
-The admin panel interface is in Turkish.
+The public-site screenshots were captured from the live English version on 16 October 2026 at 1440 × 1000 (desktop) and 390 × 844 (mobile). They include the newly added CVera, MERIDIAN and LearnToPoker projects.
+
+### Project pages
+
+| CVera | MERIDIAN |
+| --- | --- |
+| ![CVera project page with its updated screenshot and technology stack](docs/screenshots/project-detail.png) | ![MERIDIAN project page showing the orbital systems experience](docs/screenshots/project-meridian.png) |
+
+| LearnToPoker | MediMind AI |
+| --- | --- |
+| ![LearnToPoker project page with the prominent gambling warning](docs/screenshots/project-learntopoker.png) | ![MediMind AI project page showing the updated dark interface and body map](docs/screenshots/project-medimind.png) |
+
+![CVera detail sections with highlights, the overview and CV analysis features](docs/screenshots/project-sections.png)
+
+The portfolio currently lists 14 projects. CVera, MERIDIAN and LearnToPoker each have highlights and eight detailed sections in all four site languages, covering features, architecture, interaction, accessibility and limitations. LearnToPoker retains a prominent warning about gambling and explains that the application uses virtual chips without real-money play. MediMind AI uses its updated dark-theme home screenshot.
+
+### Local admin panel
+
+![Local admin panel listing projects; earlier capture of the Turkish interface](docs/screenshots/admin-panel.png)
+
+The admin panel interface is in Turkish. This earlier admin screenshot is retained to illustrate the management workflow; it is not a capture of the current public project list.
 
 ## Features
 
@@ -145,7 +164,7 @@ Inertia is a sprint and task board for small teams.
 - Offers 1:1 chat.
 ```
 
-The export converts this text to `texts.<lang>.sections` on the server; the raw text is not written to the JSON file. The project page shows these sections after the description and highlights. An empty field leaves the page unchanged.
+The export converts this text to `texts.<lang>.sections` on the server; the raw text is not written to the JSON file. The project page shows highlights followed by these sections. When sections are present, they replace the plain description; otherwise the description is shown. The LearnToPoker warning remains visible above its screenshot.
 
 ## Deployment
 
@@ -171,7 +190,7 @@ cd frontend
 npx ng build           # production build
 ```
 
-The production build reports an estimated initial transfer size of 91.12 kB.
+The production build for the October 2026 project update reports an estimated initial transfer size of 91.23 kB.
 
 ## Security notes
 

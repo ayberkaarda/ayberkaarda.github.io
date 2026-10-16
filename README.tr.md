@@ -10,13 +10,32 @@ Ayberk Arda'nın kişisel portfolyo sitesi; canlı adres **https://ayberkaarda.g
 | --- | --- |
 | ![Koyu temada ana sayfa girişi; sağda yelpaze biçiminde proje kartları](docs/screenshots/hero-dark.png) | ![Açık temada ana sayfa girişi](docs/screenshots/hero-light.png) |
 | ![Koyu temada Projeler bölümü; ızgarada proje kartları](docs/screenshots/projects-dark.png) | ![Açık temada Deneyim bölümü](docs/screenshots/experience-light.png) |
-| ![Inertia proje detay sayfası; öne çıkanlar ve detay bölümleri](docs/screenshots/project-detail.png) | ![Sitedeki projeleri listeleyen yerel yönetim paneli](docs/screenshots/admin-panel.png) |
 
 | Mobil, koyu | Mobil, açık |
 | --- | --- |
 | <img src="docs/screenshots/mobile-dark.png" width="300" alt="390 px genişliğinde telefon ekranında ana sayfa, koyu tema"> | <img src="docs/screenshots/mobile-light.png" width="300" alt="390 px genişliğinde telefon ekranında ana sayfa, açık tema"> |
 
-Ekran görüntüleri sitenin İngilizce sürümünden alınmıştır.
+Herkese açık site ekran görüntüleri, 16 Ekim 2026 tarihinde canlı sitenin İngilizce sürümünden 1440 × 1000 (masaüstü) ve 390 × 844 (mobil) boyutlarında alınmıştır. Görseller yeni eklenen CVera, MERIDIAN ve LearnToPoker projelerini içerir.
+
+### Proje sayfaları
+
+| CVera | MERIDIAN |
+| --- | --- |
+| ![CVera proje sayfası; güncel ekran görüntüsü ve kullanılan teknolojiler](docs/screenshots/project-detail.png) | ![MERIDIAN proje sayfası; yörünge sistemleri deneyimi](docs/screenshots/project-meridian.png) |
+
+| LearnToPoker | MediMind AI |
+| --- | --- |
+| ![LearnToPoker proje sayfası; büyük ve belirgin kumar uyarısı](docs/screenshots/project-learntopoker.png) | ![MediMind AI proje sayfası; yenilenen koyu arayüz ve vücut haritası](docs/screenshots/project-medimind.png) |
+
+![CVera detay bölümleri; öne çıkanlar, genel bakış ve CV analizi özellikleri](docs/screenshots/project-sections.png)
+
+Portfolyoda şu anda 14 proje listelenir. CVera, MERIDIAN ve LearnToPoker için sitenin dört dilinde öne çıkanlar ve sekizer ayrıntılı bölüm bulunur; özellikler, mimari, etkileşim, erişilebilirlik ve sınırlar açıklanır. LearnToPoker sayfasında büyük kumar uyarısı korunur ve uygulamanın gerçek para içermeyen sanal fişlerle çalıştığı belirtilir. MediMind AI görseli yenilenen koyu tema ana ekranını gösterir.
+
+### Yerel yönetim paneli
+
+![Projeleri listeleyen yerel yönetim paneli; Türkçe arayüzün önceki ekran görüntüsü](docs/screenshots/admin-panel.png)
+
+Yönetim panelinin arayüzü Türkçedir. Bu önceki panel görüntüsü yönetim akışını göstermek için korunmuştur; herkese açık sitenin güncel proje listesini göstermez.
 
 ## Özellikler
 
@@ -143,7 +162,7 @@ Inertia küçük ekipler için bir sprint ve görev panosudur.
 - Bire bir sohbet sunar.
 ```
 
-Dışa aktarım bu metni sunucuda `texts.<dil>.sections` dizisine çevirir; ham metin JSON dosyasına yazılmaz. Proje sayfası bu bölümleri açıklama ve öne çıkanlardan sonra gösterir. Alan boşsa sayfa değişmez.
+Dışa aktarım bu metni sunucuda `texts.<dil>.sections` dizisine çevirir; ham metin JSON dosyasına yazılmaz. Proje sayfası öne çıkanlardan sonra detay bölümlerini gösterir. Bölümler varsa düz açıklamanın yerini alır; yoksa açıklama gösterilir. LearnToPoker uyarısı ekran görüntüsünün üzerinde görünür kalır.
 
 ## Yayın
 
@@ -169,7 +188,7 @@ cd frontend
 npx ng build           # üretim derlemesi
 ```
 
-Üretim derlemesi, ilk yükleme için tahmini aktarım boyutunu 91.12 kB olarak bildirir.
+Ekim 2026 proje güncellemesinin üretim derlemesi, ilk yükleme için tahmini aktarım boyutunu 91.23 kB olarak bildirir.
 
 ## Güvenlik notları
 
