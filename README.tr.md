@@ -44,7 +44,7 @@ Yönetim panelinin arayüzü Türkçedir. Bu önceki panel görüntüsü yöneti
 - Angular 22, bağımsız (standalone) bileşenler ve sinyaller; çalışma anında sunucu tarafı yok.
 - `/tr/`, `/en/`, `/fr/`, `/de/` altında dört dil. Kök yol `/` önce kaydedilmiş seçime, sonra tarayıcı diline, hiçbiri yoksa İngilizceye yönlendirir.
 - Açık ve koyu tema. Ziyaretçi seçim yapana kadar tema sistem ayarını izler; satır içi bir betik temayı ilk boyamadan önce uygular.
-- Masaüstü ve mobil header’da erişilebilir animasyon aç/kapat switch’i. Tercih yerel olarak kaydedilir ve proje sayfalarında korunur; footer’da artık hareket kontrolü bulunmaz.
+- Masaüstü ve mobil header’da erişilebilir animasyon aç/kapat switch’i. Kullanıcı seçim yapana kadar sistemin hareket tercihini izler. Açık veya kapalı seçimi sistem ayarının önüne geçer, yerel olarak kaydedilir ve proje sayfalarında korunur; footer’da artık hareket kontrolü bulunmaz.
 - Ana sayfa bölümleri: giriş, projeler, deneyim, yetenekler, iletişim.
 - Geniş ekranlarda öne çıkan proje kartları girişte yelpaze olarak başlar ve kaydırdıkça proje ızgarasına yerleşir. Sahne kodu ayrı, tembel yüklenen bir parçadır; dar ekranlarda ve hareket azaltma tercihinde yüklenmez.
 - Her proje için bir sayfa (`/<dil>/projects/<slug>/`): özet, görsel, teknolojiler, bağlantılar, öne çıkanlar, isteğe bağlı detay bölümleri ve önceki/sonraki gezinmesi.
@@ -189,7 +189,7 @@ cd frontend
 npx ng build           # üretim derlemesi
 ```
 
-Ekim 2026 header güncellemesinin üretim derlemesi, ilk yükleme için tahmini aktarım boyutunu 91.45 kB olarak bildirir.
+Ekim 2026 animasyon düzeltmesinin üretim derlemesi, ilk yükleme için tahmini aktarım boyutunu 91.39 kB olarak bildirir.
 
 ## Güvenlik notları
 

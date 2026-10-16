@@ -116,14 +116,9 @@ app-contact { display: block; min-width: 0; }
 /* Reduced motion always leaves content visible. */
 .reveal { opacity: 1; transform: none; }
 .reveal--heading { clip-path: inset(0); }
-@media (prefers-reduced-motion: no-preference) {
   html:not([data-motion='reduce']) .reveal {
     transition: opacity var(--t-slow) var(--ease-out), transform var(--t-slow) var(--ease-out), clip-path var(--t-slow) var(--ease-out);
   }
   html:not([data-motion='reduce']) .reveal:not(.is-in) { opacity: 0; transform: translateY(var(--space-2)); }
   html:not([data-motion='reduce']) .reveal--heading:not(.is-in) { clip-path: inset(0 0 100% 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1 !important; transform: none !important; clip-path: inset(0) !important; transition: none !important; }
-}
 html[data-motion='reduce'] .reveal { opacity: 1 !important; transform: none !important; clip-path: inset(0) !important; transition: none !important; }

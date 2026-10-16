@@ -87,15 +87,13 @@ export class HomePage {
       );
       main.querySelectorAll('[data-hero], section[id]').forEach((el) => observer.observe(el));
 
-      // The fan scene: wide screens only, never with reduced motion (media query or footer switch).
+      // The fan scene follows the resolved motion preference, including explicit overrides.
       const html = document.documentElement;
       const wide = matchMedia('(min-width: 960px)');
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)');
       let stop: (() => void) | null = null;
       let loading = false;
       const allowed = () =>
         wide.matches &&
-        !reduce.matches &&
         html.dataset['motion'] !== 'reduce' &&
         main.querySelectorAll('[data-fan-card]').length === 5;
 
@@ -124,7 +122,6 @@ export class HomePage {
       const motionAttr = new MutationObserver(sync);
       motionAttr.observe(html, { attributes: true, attributeFilter: ['data-motion'] });
       wide.addEventListener('change', sync);
-      reduce.addEventListener('change', sync);
       this.syncScene = sync;
       sync();
 
@@ -133,7 +130,6 @@ export class HomePage {
         observer.disconnect();
         motionAttr.disconnect();
         wide.removeEventListener('change', sync);
-        reduce.removeEventListener('change', sync);
         stop?.();
         this.syncScene = null;
       });

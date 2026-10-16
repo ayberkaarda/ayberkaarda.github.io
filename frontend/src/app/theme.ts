@@ -90,9 +90,7 @@ export class ThemeService {
   /** Colours ease for one short moment; never with reduced motion. */
   private ease(root: HTMLElement): void {
     const win = this.document.defaultView;
-    const reduce =
-      root.dataset['motion'] === 'reduce' ||
-      !!win?.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const reduce = root.dataset['motion'] === 'reduce';
     if (reduce || !win) return;
     root.classList.add('theme-anim');
     win.clearTimeout(this.timer);

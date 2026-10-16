@@ -19,13 +19,11 @@ export const appConfig: ApplicationConfig = {
       // Cross-fade between routes; the project screenshot morphs from card to detail
       // (shared `view-transition-name: project-<slug>`). Skipped on first load, in
       // background tabs (a pending transition would leave the page blank) and when
-      // the visitor asked for less motion (media query or the footer switch).
+      // the resolved motion preference is reduced.
       withViewTransitions({
         skipInitialTransition: true,
         onViewTransitionCreated: ({ transition }) => {
-          const reduce =
-            window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-            document.documentElement.dataset['motion'] === 'reduce';
+          const reduce = document.documentElement.dataset['motion'] === 'reduce';
           if (document.hidden || reduce) transition.skipTransition();
         },
       }),

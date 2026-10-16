@@ -30,5 +30,4 @@
   --band-edge:#F4F1EA;
   --scheme:light;
 }
-@media (prefers-reduced-motion:reduce){:root{--t-fast:0ms;--t-base:0ms;--t-slow:0ms;--t-theme:0ms}}
 :root[data-motion='reduce']{--t-fast:0ms;--t-base:0ms;--t-slow:0ms;--t-theme:0ms}

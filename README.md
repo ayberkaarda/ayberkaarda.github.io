@@ -44,7 +44,7 @@ The admin panel interface is in Turkish. This earlier admin screenshot is retain
 - Angular 22 with standalone components and signals; no server side at runtime.
 - Four languages under `/tr/`, `/en/`, `/fr/`, `/de/`. The root path `/` redirects to the saved choice, then to the browser language, then to English.
 - Light and dark themes. The theme follows the system setting until the visitor picks one; an inline script applies it before the first paint.
-- An accessible animation on/off switch in the desktop and mobile header. The choice is saved locally and stays consistent across project pages; the footer no longer contains a motion control.
+- An accessible animation on/off switch in the desktop and mobile header. It follows the system motion preference until the visitor explicitly chooses on or off. That choice overrides the system setting, is saved locally and stays consistent across project pages; the footer no longer contains a motion control.
 - Home page sections: hero, projects, experience, skills, contact.
 - On wide screens, the featured project cards start as a fan in the hero and move into the project grid while scrolling. The scene code is a separate lazy chunk and is not loaded on narrow screens or with reduced motion.
 - A page per project (`/<lang>/projects/<slug>/`) with summary, image, stack, links, highlights, optional detail sections and previous/next navigation.
@@ -191,7 +191,7 @@ cd frontend
 npx ng build           # production build
 ```
 
-The production build for the October 2026 header update reports an estimated initial transfer size of 91.45 kB.
+The production build for the October 2026 motion fix reports an estimated initial transfer size of 91.39 kB.
 
 ## Security notes
 

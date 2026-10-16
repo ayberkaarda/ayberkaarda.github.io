@@ -27,21 +27,18 @@ export class Reveal {
     const destroyRef = inject(DestroyRef);
 
     afterNextRender(() => {
-      const media = window.matchMedia('(prefers-reduced-motion: reduce)');
       let observer: IntersectionObserver | undefined;
       const show = () => {
         this.shown.set(true);
         observer?.disconnect();
       };
       const checkMotion = () => {
-        if (media.matches || document.documentElement.dataset['motion'] === 'reduce') show();
+        if (document.documentElement.dataset['motion'] === 'reduce') show();
       };
-      media.addEventListener('change', checkMotion);
       const preferenceObserver = new MutationObserver(checkMotion);
       preferenceObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-motion'] });
       destroyRef.onDestroy(() => {
         observer?.disconnect();
-        media.removeEventListener('change', checkMotion);
         preferenceObserver.disconnect();
       });
       checkMotion();

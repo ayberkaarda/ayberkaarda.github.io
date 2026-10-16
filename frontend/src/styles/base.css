@@ -322,7 +322,6 @@ a:hover {
 }
 
 /* ---------- Motion ---------- */
-@media (prefers-reduced-motion: no-preference) {
   html:not([data-motion='reduce']) {
     scroll-behavior: smooth;
   }
@@ -340,18 +339,6 @@ a:hover {
       fill var(--t-theme) var(--ease-std),
       stroke var(--t-theme) var(--ease-std) !important;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-
 html[data-motion='reduce'],
 html[data-motion='reduce'] *,
 html[data-motion='reduce'] *::before,

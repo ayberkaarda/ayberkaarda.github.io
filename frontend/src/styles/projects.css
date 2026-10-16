@@ -94,13 +94,6 @@ html.theme-anim [data-fan-card] {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .card:hover,
-  .card:focus-visible {
-    translate: none;
-  }
-}
-
 html[data-motion='reduce'] .card:hover,
 html[data-motion='reduce'] .card:focus-visible {
   translate: none;
