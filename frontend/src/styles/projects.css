@@ -187,7 +187,7 @@ html[data-motion='reduce'] .card:focus-visible {
   }
 }
 
-/* ---------- Narrow screens: featured strip under the hero, then the list ---------- */
+/* ---------- Narrow screens: title, featured strip, then the list (DOM order) ---------- */
 @media (max-width: 959.98px) {
   .projects {
     padding-top: 0;
@@ -200,11 +200,11 @@ html[data-motion='reduce'] .card:focus-visible {
   }
 
   .projects-title {
-    margin-top: var(--space-4);
+    margin-top: var(--space-3);
+    margin-bottom: 0;
   }
 
   .fan-row {
-    order: -1;
     display: flex;
     gap: var(--space-2);
     min-height: calc(min(78vw, 320px) * 0.625 + 8.5rem);
