@@ -215,6 +215,13 @@
   background: var(--accent);
   color: var(--on-accent);
   rotate: -1deg;
+  /* Thin mono reads poorly on the red tape; poster capitals in heavy black instead. */
+  font-family: var(--font-display);
+  font-stretch: 85%;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 :root[data-theme='punk'] .tech-list {
