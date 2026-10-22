@@ -278,7 +278,6 @@
   box-shadow: var(--focus), 6px 6px 0 var(--punk-blue);
 }
 
-/* Tape stays within the strip's top padding on narrow screens, where the row clips overflow. */
 :root[data-theme='punk'] :is(.card, .pp-shot)::before {
   content: '';
   position: absolute;
@@ -334,6 +333,26 @@
 
 :root[data-theme='punk'] .projects-rest > .card:nth-child(even) {
   rotate: 0.6deg;
+}
+
+/* Narrow screens list the featured cards with the rest, so they take the same
+   tilt and tape rhythm, phased to run on without a break into the other cards. */
+@media (max-width: 959.98px) {
+  :root[data-theme='punk'] .fan-row > .card:nth-child(odd) {
+    rotate: 0.6deg;
+  }
+
+  :root[data-theme='punk'] .fan-row > .card:nth-child(even) {
+    rotate: -0.8deg;
+  }
+
+  :root[data-theme='punk'] .fan-row > .card:nth-child(3n + 1)::before {
+    left: 68%;
+  }
+
+  :root[data-theme='punk'] .fan-row > .card:nth-child(3n)::before {
+    left: 30%;
+  }
 }
 
 /* ---------- Experience: one sheet of newsprint with torn edges ---------- */

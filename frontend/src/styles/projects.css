@@ -187,15 +187,15 @@ html[data-motion='reduce'] .card:focus-visible {
   }
 }
 
-/* ---------- Narrow screens: title, featured strip, then the list (DOM order) ---------- */
+/* ---------- Narrow screens: title, then every project in one list (DOM order) ---------- */
 @media (max-width: 959.98px) {
   .projects {
     padding-top: 0;
   }
 
   .projects-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-3);
   }
 
@@ -204,38 +204,19 @@ html[data-motion='reduce'] .card:focus-visible {
     margin-bottom: 0;
   }
 
-  .fan-row {
-    display: flex;
-    gap: var(--space-2);
-    min-height: calc(min(78vw, 320px) * 0.625 + 8.5rem);
-    margin-inline: calc(-1 * var(--gutter));
-    padding: var(--space-1) var(--gutter) var(--space-3);
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--gutter);
-    scrollbar-width: thin;
-    scrollbar-color: var(--line) transparent;
-  }
-
-  .fan-row > .card {
-    flex: 0 0 min(78vw, 320px);
-    scroll-snap-align: start;
-  }
-
-  .fan-row > .card:nth-child(even) {
-    transform: translateY(var(--space-1));
-  }
-
+  /* Featured and remaining cards share one grid, so all fourteen read alike. */
+  .fan-row,
   .projects-rest {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-3);
+    display: contents;
   }
 }
 
 @media (min-width: 640px) and (max-width: 959.98px) {
-  .projects-rest {
+  .projects-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projects-title {
+    grid-column: 1 / -1;
   }
 }

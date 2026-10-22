@@ -11,8 +11,8 @@ const FAN = 5;
 
 /**
  * Project grid. The first five cards carry `data-fan-card`; on wide screens the
- * scroll scene lends them to the hero slots, on narrow screens they form a
- * horizontal strip right under the hero.
+ * scroll scene lends them to the hero slots, on narrow screens they head the
+ * single list of projects.
  */
 @Component({
   selector: 'app-projects',
@@ -101,8 +101,7 @@ export class ProjectsSection {
   }
 
   protected sizes(i: number): string {
-    if (i === 0) return '(min-width: 960px) min(66vw, 860px), min(78vw, 320px)';
-    if (i < FAN) return '(min-width: 960px) min(33vw, 420px), min(78vw, 320px)';
+    if (i === 0) return '(min-width: 960px) min(66vw, 860px), (min-width: 640px) 50vw, 100vw';
     return '(min-width: 960px) min(33vw, 420px), (min-width: 640px) 50vw, 100vw';
   }
 
