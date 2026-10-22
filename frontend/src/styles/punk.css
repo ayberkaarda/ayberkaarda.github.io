@@ -1,0 +1,313 @@
+/* Punk theme: a zine collage on photocopy black. Every rule is scoped to [data-theme='punk']
+   and reads the punk tokens in tokens.css. Motion is stepped (a few frames per second, like
+   hand animation on twos and threes); the reduced-motion rule in base.css stops all of it. */
+
+/* ---------- Texture ---------- */
+:root[data-theme='punk'] body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95 0 0 0 0 .92 0 0 0 0 .86 .32 0 0 0 -.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+:root[data-theme='punk'] ::selection {
+  background: var(--punk-yellow);
+  color: var(--ink);
+}
+
+/* Ben-Day dots instead of the hero's sine lines, fading out towards the text. */
+:root[data-theme='punk'] .waves::before {
+  background: radial-gradient(circle, var(--wave) 0 1.6px, transparent 2.1px) 0 0 / 11px 11px;
+  opacity: 0.4;
+  -webkit-mask: linear-gradient(to left, black, rgb(0 0 0 / 0.5) 40%, transparent 75%);
+  mask: linear-gradient(to left, black, rgb(0 0 0 / 0.5) 40%, transparent 75%);
+}
+
+/* ---------- Type: condensed poster capitals, printed slightly off register ---------- */
+:root[data-theme='punk'] :is(h1, .display, h2:not(.section-num, .pp-h2)) {
+  font-stretch: 62%;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-shadow:
+    0.035em 0.03em 0 var(--punk-blue),
+    -0.025em -0.02em 0 color-mix(in srgb, var(--punk-red) 85%, transparent);
+}
+
+:root[data-theme='punk'] .contact-email {
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 0.08em;
+}
+
+/* ---------- Hero name: cut-out letters ---------- */
+:root[data-theme='punk'] .hero-name__text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+:root[data-theme='punk'] .ransom {
+  display: block;
+  font-size: 0.8em;
+  line-height: 1.15;
+  text-shadow: none;
+}
+
+:root[data-theme='punk'] .ransom__word {
+  display: block;
+  white-space: nowrap;
+}
+
+:root[data-theme='punk'] .ransom__word + .ransom__word {
+  margin-top: 0.06em;
+  margin-left: 0.5em;
+}
+
+:root[data-theme='punk'] .ransom__ch {
+  --rot: 0deg;
+  display: inline-block;
+  margin-right: 0.05em;
+  padding: 0.06em 0.1em 0.02em;
+  rotate: var(--rot);
+  animation: punk-boil var(--boil, 0.5s) steps(1, end) infinite;
+}
+
+/* Poster red, condensed black */
+:root[data-theme='punk'] .ransom__ch[data-cut='0'] {
+  --rot: 3deg;
+  --boil: 0.42s;
+  background: var(--punk-red);
+  color: var(--ink);
+}
+
+/* Newsprint, serif italic */
+:root[data-theme='punk'] .ransom__ch[data-cut='1'] {
+  --rot: -4deg;
+  --boil: 0.66s;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+/* Black scrap with a paper rim, typewriter */
+:root[data-theme='punk'] .ransom__ch[data-cut='2'] {
+  --rot: -1.5deg;
+  --boil: 0.33s;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  box-shadow: inset 0 0 0 0.05em var(--paper);
+}
+
+/* Highlighter yellow, wide and light */
+:root[data-theme='punk'] .ransom__ch[data-cut='3'] {
+  --rot: -5deg;
+  --boil: 0.5s;
+  background: var(--punk-yellow);
+  color: var(--ink);
+  font-stretch: 125%;
+  font-weight: 300;
+}
+
+/* Blue, condensed black */
+:root[data-theme='punk'] .ransom__ch[data-cut='4'] {
+  --rot: 4deg;
+  --boil: 0.58s;
+  background: var(--punk-blue);
+  color: var(--paper);
+}
+
+/* ---------- Stickers and tape ---------- */
+:root[data-theme='punk'] .hero-label {
+  --rot: -1.5deg;
+  width: fit-content;
+  padding: 0.3em 0.6em;
+  background: var(--punk-yellow);
+  color: var(--ink);
+  rotate: var(--rot);
+}
+
+:root[data-theme='punk'] .section-num {
+  --rot: -1.5deg;
+  width: fit-content;
+  padding: 0.35em 0.7em 0.3em;
+  background: var(--accent);
+  color: var(--on-accent);
+  rotate: var(--rot);
+  animation: punk-boil 0.66s steps(1, end) infinite;
+}
+
+/* On the paper band the sticker is the deeper red with paper text. */
+:root[data-theme='punk'] #experience .section-num {
+  color: var(--band-bg);
+}
+
+:root[data-theme='punk'] #experience .section-num::before {
+  display: none;
+}
+
+:root[data-theme='punk'] .site-header__name {
+  --rot: -2deg;
+  padding-inline: 0.35em;
+  background: linear-gradient(var(--paper), var(--paper)) center / 100% 1.45em no-repeat;
+  color: var(--ink);
+  font-stretch: 62%;
+  font-weight: 900;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  word-spacing: 0.15em;
+  rotate: var(--rot);
+}
+
+:root[data-theme='punk'] .site-header__name:hover {
+  background-image: linear-gradient(var(--punk-red), var(--punk-red));
+  color: var(--ink);
+}
+
+:root[data-theme='punk'] .site-nav a.active {
+  box-shadow: 2px 2px 0 var(--punk-blue);
+}
+
+/* Technology ribbon: a strip of red tape across the page, wider than the hero so the
+   tilt never shows its ends; the hero clips it (the viewport would otherwise scroll sideways). */
+:root[data-theme='punk'] .hero {
+  overflow-x: clip;
+}
+
+:root[data-theme='punk'] .tech {
+  margin-inline: -1rem;
+  border-block: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+  rotate: -1deg;
+}
+
+:root[data-theme='punk'] .tech-list {
+  gap: var(--space-2);
+  padding-right: var(--space-2);
+}
+
+:root[data-theme='punk'] .tech-list li::after {
+  content: '✶';
+  content: '✶' / '';
+  margin-left: var(--space-2);
+}
+
+/* ---------- Buttons: square, hard offset print shadow ---------- */
+:root[data-theme='punk'] .btn {
+  border-width: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: 4px 4px 0 var(--punk-blue);
+  transition:
+    translate var(--t-fast) var(--ease-std),
+    box-shadow var(--t-fast) var(--ease-std),
+    background-color var(--t-fast) var(--ease-std),
+    border-color var(--t-fast) var(--ease-std),
+    color var(--t-fast) var(--ease-std);
+}
+
+:root[data-theme='punk'] .btn:hover {
+  translate: -2px -2px;
+  box-shadow: 6px 6px 0 var(--punk-red);
+}
+
+:root[data-theme='punk'] .btn:focus-visible {
+  box-shadow: var(--focus), 4px 4px 0 var(--punk-blue);
+}
+
+/* ---------- Cards: paper cut-outs taped to the page ---------- */
+:root[data-theme='punk'] .card {
+  --surface: var(--paper);
+  --fg: var(--ink);
+  --fg-2: var(--ink-2);
+  --accent: var(--band-accent);
+  position: relative;
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--punk-blue);
+}
+
+:root[data-theme='punk'] .card:hover {
+  border-color: var(--ink);
+  box-shadow: 8px 8px 0 var(--punk-red);
+}
+
+:root[data-theme='punk'] .card:focus-visible {
+  box-shadow: var(--focus), 6px 6px 0 var(--punk-blue);
+}
+
+/* Tape stays within the strip's top padding on narrow screens, where the row clips overflow. */
+:root[data-theme='punk'] :is(.card, .pp-shot)::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  z-index: 1;
+  width: 72px;
+  height: 22px;
+  background: color-mix(in srgb, var(--punk-yellow) 70%, transparent);
+  translate: -50% -25%;
+  rotate: -3deg;
+  pointer-events: none;
+}
+
+/* Only the cards outside the hero scene are tilted; the scene measures the fan cards untransformed. */
+:root[data-theme='punk'] .projects-rest > .card:nth-child(odd) {
+  rotate: -0.8deg;
+}
+
+:root[data-theme='punk'] .projects-rest > .card:nth-child(even) {
+  rotate: 0.6deg;
+}
+
+/* ---------- Experience: one sheet of newsprint with torn edges ---------- */
+:root[data-theme='punk'] #experience {
+  background: var(--band-bg);
+  clip-path: polygon(
+    0 9px, 4% 2px, 8% 12px, 13% 4px, 17% 15px, 22% 6px, 27% 11px, 31% 1px, 36% 13px, 41% 5px,
+    45% 14px, 50% 3px, 55% 10px, 59% 0, 64% 12px, 69% 4px, 73% 15px, 78% 7px, 83% 11px, 87% 2px,
+    92% 13px, 96% 5px, 100% 10px,
+    100% calc(100% - 7px), 96% calc(100% - 14px), 91% calc(100% - 3px), 86% calc(100% - 12px),
+    82% calc(100% - 1px), 77% calc(100% - 10px), 72% calc(100% - 4px), 67% calc(100% - 15px),
+    62% calc(100% - 5px), 57% calc(100% - 11px), 52% 100%, 47% calc(100% - 13px),
+    43% calc(100% - 4px), 38% calc(100% - 9px), 33% calc(100% - 2px), 28% calc(100% - 14px),
+    23% calc(100% - 6px), 18% calc(100% - 12px), 14% calc(100% - 1px), 9% calc(100% - 10px),
+    5% calc(100% - 3px), 0 calc(100% - 12px)
+  );
+}
+
+/* ---------- Project page ---------- */
+:root[data-theme='punk'] .pp-shot {
+  --surface: var(--paper);
+  --fg-2: var(--ink-2);
+  --accent: var(--band-accent);
+  position: relative;
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--punk-blue);
+}
+
+/* ---------- Motion ---------- */
+html[data-motion='reduce'][data-theme='punk'] .btn:hover {
+  translate: none;
+}
+
+@keyframes punk-boil {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: var(--rot, 0deg);
+  }
+  33% {
+    translate: 1px -1px;
+    rotate: calc(var(--rot, 0deg) + 0.8deg);
+  }
+  66% {
+    translate: -1px 1px;
+    rotate: calc(var(--rot, 0deg) - 0.6deg);
+  }
+}

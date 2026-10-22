@@ -2,7 +2,7 @@
 
 # Portfolio — Ayberk Arda
 
-Ayberk Arda'nın kişisel portfolyo sitesi; canlı adres **https://ayberkaarda.github.io**. Herkese açık site, dört dilde (Türkçe, İngilizce, Fransızca, Almanca), açık ve koyu temalı statik bir Angular uygulamasıdır. Sitede gösterilen projeler yalnızca yerel makinede çalışan küçük bir Laravel yönetim panelinden yönetilir: panel GitHub depoları için bir izin listesi tutar, her dildeki metinleri saklar ve bunları sitenin okuduğu tek bir JSON dosyasına aktarır. GitHub Actions siteyi derleyip GitHub Pages'te yayınlar.
+Ayberk Arda'nın kişisel portfolyo sitesi; canlı adres **https://ayberkaarda.github.io**. Herkese açık site, dört dilde (Türkçe, İngilizce, Fransızca, Almanca), açık, koyu ve punk temalı statik bir Angular uygulamasıdır. Sitede gösterilen projeler yalnızca yerel makinede çalışan küçük bir Laravel yönetim panelinden yönetilir: panel GitHub depoları için bir izin listesi tutar, her dildeki metinleri saklar ve bunları sitenin okuduğu tek bir JSON dosyasına aktarır. GitHub Actions siteyi derleyip GitHub Pages'te yayınlar.
 
 ## Ekran görüntüleri
 
@@ -15,7 +15,11 @@ Ayberk Arda'nın kişisel portfolyo sitesi; canlı adres **https://ayberkaarda.g
 | --- | --- |
 | <img src="docs/screenshots/mobile-dark.png" width="300" alt="390 px genişliğinde telefon ekranında ana sayfa, koyu tema"> | <img src="docs/screenshots/mobile-light.png" width="300" alt="390 px genişliğinde telefon ekranında ana sayfa, açık tema"> |
 
-Herkese açık site ekran görüntüleri, 16 Ekim 2026 tarihinde güncel üretim derlemesinin İngilizce sürümünden 1440 × 1000 (masaüstü) ve 390 × 844 (mobil) boyutlarında alınmıştır. Görseller header’daki animasyon switch’ini ve yeni eklenen CVera, MERIDIAN ve LearnToPoker projelerini içerir.
+| Punk tema | Mobil, punk |
+| --- | --- |
+| ![Punk temada ana sayfa girişi: kesik dergi harfleriyle ad, Ben-Day noktaları ve bantlanmış kâğıt kartlar](docs/screenshots/hero-punk.png) | <img src="docs/screenshots/mobile-punk.png" width="300" alt="390 px genişliğinde telefon ekranında ana sayfa, punk tema"> |
+
+Herkese açık site ekran görüntüleri, 16 Ekim 2026 tarihinde güncel üretim derlemesinin İngilizce sürümünden 1440 × 1000 (masaüstü) ve 390 × 844 (mobil) boyutlarında alınmıştır. Görseller header’daki animasyon switch’ini ve yeni eklenen CVera, MERIDIAN ve LearnToPoker projelerini içerir. Punk tema görüntüleri 22 Ekim 2026’da aynı boyutlarda eklenmiştir.
 
 ### Proje sayfaları
 
@@ -43,7 +47,8 @@ Yönetim panelinin arayüzü Türkçedir. Bu önceki panel görüntüsü yöneti
 
 - Angular 22, bağımsız (standalone) bileşenler ve sinyaller; çalışma anında sunucu tarafı yok.
 - `/tr/`, `/en/`, `/fr/`, `/de/` altında dört dil. Kök yol `/` önce kaydedilmiş seçime, sonra tarayıcı diline, hiçbiri yoksa İngilizceye yönlendirir.
-- Açık ve koyu tema. Ziyaretçi seçim yapana kadar tema sistem ayarını izler; satır içi bir betik temayı ilk boyamadan önce uygular.
+- Açık, koyu ve punk tema; header'daki üç seçenekli menüden (mobil menüde buton grubundan) seçilir. Ziyaretçi seçim yapana kadar tema sistem ayarını (açık ya da koyu) izler; satır içi bir betik temayı ilk boyamadan önce uygular.
+- Punk tema, Spider-Verse filmlerinden esinlenen bir fanzin kolajıdır: fotokopi greni, Ben-Day noktaları, kesik dergi harfleriyle ad, bantlanmış kâğıt kartlar, yırtık kâğıt Deneyim bandı ve düşük kare hızında kesik kesik titreme. Yeni font eklemez, mevcut Archivo değişken fontunu kullanır; animasyonlar kapalıyken titreme durur.
 - Masaüstü ve mobil header’da erişilebilir animasyon aç/kapat switch’i. Kullanıcı seçim yapana kadar sistemin hareket tercihini izler. Açık veya kapalı seçimi sistem ayarının önüne geçer, yerel olarak kaydedilir ve proje sayfalarında korunur; footer’da artık hareket kontrolü bulunmaz.
 - Ana sayfa bölümleri: giriş, projeler, deneyim, yetenekler, iletişim.
 - Geniş ekranlarda öne çıkan proje kartları girişte yelpaze olarak başlar ve kaydırdıkça proje ızgarasına yerleşir. Sahne kodu ayrı, tembel yüklenen bir parçadır; dar ekranlarda ve hareket azaltma tercihinde yüklenmez.
@@ -211,7 +216,7 @@ Ekim 2026 animasyon düzeltmesinin üretim derlemesi, ilk yükleme için tahmini
 
 - `prefers-reduced-motion` dikkate alınır: geçiş süreleri sıfırlanır, kaydırma sahnesi ve sayfa geçişleri atlanır, girişte hareketsiz bir görsel yığını gösterilir. Alt bilgideki *Hareketi azalt* düğmesi aynı şeyi yapar ve seçim hatırlanır.
 - Klavye: "İçeriğe geç" bağlantısı odağı içeriğe taşır, her etkileşimli öğenin görünür bir odak halkası vardır ve proje sayfası odağı başlığına taşır.
-- Metin kontrastı tema değişkenlerinden hesaplanmıştır. İki temada da en düşük metin/arka plan oranı 5.0:1'dir; bu, normal metin için WCAG AA sınırının üzerindedir.
+- Metin kontrastı tema değişkenlerinden hesaplanmıştır. Tüm temalarda en düşük metin/arka plan oranı 5.0:1'dir; bu, normal metin için WCAG AA sınırının üzerindedir.
 - Proje görselleri WebP olarak sunulur: proje sayfaları için 1600 px, ana sayfa için 720 px küçük görseller.
 - Yazı tipleri derlemeyle birlikte siteden sunulur. Analitik, çerez ya da üçüncü taraf isteği yoktur; tema, dil ve hareket tercihleri `localStorage` içinde tutulur.
 

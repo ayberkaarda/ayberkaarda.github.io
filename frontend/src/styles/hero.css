@@ -42,8 +42,13 @@ app-projects {
   overflow-wrap: anywhere;
 }
 
-.hero-name span {
+.hero-name__text > span {
   display: block;
+}
+
+/* Cut-out letters; only the punk theme shows them (punk.css). */
+.ransom {
+  display: none;
 }
 
 .hero-tagline {

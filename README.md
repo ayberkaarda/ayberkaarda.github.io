@@ -2,7 +2,7 @@
 
 # Portfolio — Ayberk Arda
 
-Personal portfolio of Ayberk Arda, live at **https://ayberkaarda.github.io**. The public site is a static Angular application in four languages (Turkish, English, French, German) with light and dark themes. The projects it shows are managed in a small Laravel admin panel that runs only on the local machine: it keeps an allowlist of GitHub repositories, holds the texts for each language and exports them to one JSON file that the site reads. GitHub Actions builds the site and publishes it to GitHub Pages.
+Personal portfolio of Ayberk Arda, live at **https://ayberkaarda.github.io**. The public site is a static Angular application in four languages (Turkish, English, French, German) with light, dark and punk themes. The projects it shows are managed in a small Laravel admin panel that runs only on the local machine: it keeps an allowlist of GitHub repositories, holds the texts for each language and exports them to one JSON file that the site reads. GitHub Actions builds the site and publishes it to GitHub Pages.
 
 ## Screenshots
 
@@ -15,7 +15,11 @@ Personal portfolio of Ayberk Arda, live at **https://ayberkaarda.github.io**. Th
 | --- | --- |
 | <img src="docs/screenshots/mobile-dark.png" width="300" alt="Home page on a 390 px wide phone screen, dark theme"> | <img src="docs/screenshots/mobile-light.png" width="300" alt="Home page on a 390 px wide phone screen, light theme"> |
 
-The public-site screenshots were captured from the current production build in English on 16 October 2026 at 1440 × 1000 (desktop) and 390 × 844 (mobile). They include the header animation switch and the newly added CVera, MERIDIAN and LearnToPoker projects.
+| Punk theme | Mobile, punk |
+| --- | --- |
+| ![Home page hero in the punk theme: the name in cut-out letters, halftone dots and taped paper cards](docs/screenshots/hero-punk.png) | <img src="docs/screenshots/mobile-punk.png" width="300" alt="Home page on a 390 px wide phone screen, punk theme"> |
+
+The public-site screenshots were captured from the current production build in English on 16 October 2026 at 1440 × 1000 (desktop) and 390 × 844 (mobile). They include the header animation switch and the newly added CVera, MERIDIAN and LearnToPoker projects. The punk-theme screenshots were added on 22 October 2026 at the same sizes.
 
 ### Project pages
 
@@ -43,7 +47,8 @@ The admin panel interface is in Turkish. This earlier admin screenshot is retain
 
 - Angular 22 with standalone components and signals; no server side at runtime.
 - Four languages under `/tr/`, `/en/`, `/fr/`, `/de/`. The root path `/` redirects to the saved choice, then to the browser language, then to English.
-- Light and dark themes. The theme follows the system setting until the visitor picks one; an inline script applies it before the first paint.
+- Light, dark and punk themes, chosen from a three-option menu in the header (a button group in the mobile menu). The theme follows the system setting (light or dark) until the visitor picks one; an inline script applies it before the first paint.
+- The punk theme is a zine collage inspired by the Spider-Verse films: photocopy grain, halftone dots, the name in cut-out letters, taped paper cards, a torn-paper Experience band and stepped low-frame-rate jitter. It uses the existing self-hosted Archivo variable font, and its jitter stops when animations are off.
 - An accessible animation on/off switch in the desktop and mobile header. It follows the system motion preference until the visitor explicitly chooses on or off. That choice overrides the system setting, is saved locally and stays consistent across project pages; the footer no longer contains a motion control.
 - Home page sections: hero, projects, experience, skills, contact.
 - On wide screens, the featured project cards start as a fan in the hero and move into the project grid while scrolling. The scene code is a separate lazy chunk and is not loaded on narrow screens or with reduced motion.
@@ -213,7 +218,7 @@ The production build for the October 2026 motion fix reports an estimated initia
 
 - `prefers-reduced-motion` is respected: transitions are set to zero, the scroll scene and page view transitions are skipped, and the hero shows a still image stack instead. A *Reduce motion* switch in the footer does the same and is remembered.
 - Keyboard use: a skip link moves focus to the content, every interactive element has a visible focus ring, and the project page moves focus to its heading.
-- Text contrast is computed from the theme tokens. The lowest text-on-background ratio in either theme is 5.0:1, above WCAG AA for normal text.
+- Text contrast is computed from the theme tokens. The lowest text-on-background ratio in any theme is 5.0:1, above WCAG AA for normal text.
 - Project images are served as WebP: 1600 px for project pages, 720 px thumbnails for the home page.
 - Fonts are self-hosted from the build. There is no analytics, no cookies and no third-party request; theme, language and motion choices are kept in `localStorage`.
 

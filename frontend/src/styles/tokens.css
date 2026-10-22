@@ -30,4 +30,17 @@
   --band-edge:#F4F1EA;
   --scheme:light;
 }
+/* Punk theme: photocopy black, newsprint text, poster red. Paper, ink, blue and yellow are
+   for the cut-out pieces in punk.css; blue is decoration only and never carries text. */
+:root[data-theme='punk']{
+  --bg:#0D0C0C; --surface:#1A1818; --line:#3A3535; --wave:#FF3B3B;
+  --fg:#F2EBDC; --fg-2:#B5AC9C; --accent:#FF3B3B; --on-accent:#0D0C0C;
+  --band-bg:#EDE4CF; --band-fg:#121010; --band-fg-2:#3D3631; --band-accent:#B8121C;
+  --band-edge:#0D0C0C;
+  --paper:#EDE4CF; --ink:#121010; --ink-2:#3D3631;
+  --punk-red:#FF3B3B; --punk-blue:#2F5BFF; --punk-yellow:#FFE14D;
+  --r-card:0; --r-img:0; --r-btn:0;
+  --focus:0 0 0 2px var(--bg),0 0 0 4px var(--punk-yellow);
+  --scheme:dark;
+}
 :root[data-motion='reduce']{--t-fast:0ms;--t-base:0ms;--t-slow:0ms;--t-theme:0ms}

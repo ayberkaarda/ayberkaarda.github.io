@@ -1,7 +1,8 @@
 import { Component, ElementRef, computed, inject, input, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ui, type Lang } from './i18n';
-import { ThemeService } from './theme';
+import { THEMES, THEME_TEXT, ThemeService } from './theme';
+import { ThemeIcon } from './theme-icon';
 
 export interface MenuItem {
   id: string;
@@ -17,7 +18,7 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
  */
 @Component({
   selector: 'app-mobile-menu',
-  imports: [RouterLink],
+  imports: [RouterLink, ThemeIcon],
   template: `
     <dialog
       #dlg
@@ -50,21 +51,20 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
           }
         </ul>
       </nav>
-      <button type="button" class="btn btn--ghost m-menu__theme" (click)="theme.toggle()">
-        @if (theme.next() === 'light') {
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-            <circle cx="12" cy="12" r="4.25" />
-            <path
-              d="M12 2.75v2.5M12 18.75v2.5M2.75 12h2.5M18.75 12h2.5M5.46 5.46l1.77 1.77M16.77 16.77l1.77 1.77M5.46 18.54l1.77-1.77M16.77 7.23l1.77-1.77"
-            />
-          </svg>
-        } @else {
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-            <path d="M20.25 14.6A8.25 8.25 0 0 1 9.4 3.75a8.25 8.25 0 1 0 10.85 10.85Z" />
-          </svg>
+      <p id="m-theme-label" class="label m-menu__themes-label">{{ tt().label }}</p>
+      <div class="m-menu__themes" role="group" aria-labelledby="m-theme-label">
+        @for (th of themes; track th) {
+          <button
+            type="button"
+            class="btn btn--ghost"
+            [attr.aria-pressed]="th === theme.theme()"
+            (click)="theme.set(th)"
+          >
+            <app-theme-icon [theme]="th" />
+            <span>{{ tt()[th] }}</span>
+          </button>
         }
-        <span>{{ theme.label(lang()) }}</span>
-      </button>
+      </div>
     </dialog>
   `,
 })
@@ -76,7 +76,9 @@ export class MobileMenu {
   readonly active = input('');
 
   protected readonly t = computed(() => ui[this.lang()]);
+  protected readonly tt = computed(() => THEME_TEXT[this.lang()]);
   protected readonly theme = inject(ThemeService);
+  protected readonly themes = THEMES;
 
   readonly isOpen = signal(false);
 

@@ -18,7 +18,16 @@ import { ProjectsService } from '../projects.service';
         <div class="hero-text">
           <p class="label hero-label">{{ p().title }} · {{ city() }}</p>
           <h1 id="hero-name" class="display hero-name">
-            <span>{{ first }}</span> <span>{{ last }}</span>
+            <span class="hero-name__text"><span>{{ first }}</span> <span>{{ last }}</span></span>
+            <span class="ransom" aria-hidden="true">
+              @for (word of words; track $index) {
+                <span class="ransom__word">
+                  @for (c of word; track $index) {
+                    <span class="ransom__ch" [attr.data-cut]="c.cut">{{ c.ch }}</span>
+                  }
+                </span>
+              }
+            </span>
           </h1>
           <p class="hero-tagline">{{ p().tagline }}</p>
           <div class="hero-cta">
@@ -72,6 +81,14 @@ export class HeroSection {
   );
   protected readonly first = person.name.split(' ')[0];
   protected readonly last = person.name.split(' ').slice(1).join(' ');
+  /**
+   * Letter by letter for the punk theme's cut-out name; hidden from assistive tech, the plain
+   * name is read. `cut` (0-4) picks the scrap style and runs on across words, so no two words start alike.
+   */
+  protected readonly words = (() => {
+    let n = 0;
+    return [this.first, this.last].map((w) => [...w].map((ch) => ({ ch, cut: n++ % 5 })));
+  })();
   protected readonly slots = [0, 1, 2, 3, 4];
 
   protected readonly t = computed(() => ui[this.lang()]);

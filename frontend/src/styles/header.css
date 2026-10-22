@@ -188,6 +188,12 @@ app-header {
   background: var(--bg);
 }
 
+/* Theme menu: same disclosure pattern as the compact language list; the list floats, so the bar width never changes. */
+.theme-menu {
+  position: relative;
+  flex: none;
+}
+
 .theme-btn {
   display: inline-flex;
   align-items: center;
@@ -200,14 +206,50 @@ app-header {
   border-radius: var(--r-btn);
   background: var(--bg);
   color: var(--fg);
+  list-style: none;
+  cursor: pointer;
   transition:
     border-color var(--t-fast) var(--ease-std),
     color var(--t-fast) var(--ease-std);
 }
 
-.theme-btn:hover {
+.theme-btn::-webkit-details-marker {
+  display: none;
+}
+
+.theme-btn:hover,
+.theme-menu[open] .theme-btn {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.theme-menu__list button {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  width: 100%;
+  min-height: 44px;
+  padding-inline: 0.75rem;
+  border: 0;
+  border-radius: var(--r-btn);
+  background: transparent;
+  color: var(--fg-2);
+  font-size: 0.9375rem;
+  text-align: start;
+}
+
+.theme-menu__list button:hover {
+  color: var(--fg);
+}
+
+.theme-menu__list button[aria-pressed='true'] {
+  color: var(--fg);
+  font-weight: 600;
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+app-theme-icon {
+  display: contents;
 }
 
 .motion-switch {
@@ -260,8 +302,7 @@ app-header {
   .site-header__m .motion-switch__label { display: none; }
 }
 
-.theme-btn svg,
-.m-menu__theme svg {
+app-theme-icon svg {
   flex: none;
   fill: none;
   stroke: currentColor;
@@ -358,7 +399,8 @@ app-header {
   border-color: color-mix(in srgb, var(--fg) 40%, transparent);
 }
 
-.m-lang__list {
+.m-lang__list,
+.theme-menu__list {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
@@ -475,8 +517,23 @@ html:has(.m-menu[open]) {
   color: var(--accent);
 }
 
-.m-menu__theme {
-  width: 100%;
+.m-menu__themes-label {
+  margin-bottom: var(--space-1);
+}
+
+.m-menu__themes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-1);
+}
+
+.m-menu__themes .btn {
+  padding-inline: 0.5rem;
   white-space: normal;
-  text-align: start;
+}
+
+.m-menu__themes .btn[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--fg);
 }
