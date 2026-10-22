@@ -33,7 +33,7 @@ The public-site screenshots were captured from the current production build in E
 
 ![CVera detail sections with highlights, the overview and CV analysis features](docs/screenshots/project-sections.png)
 
-The portfolio currently lists 14 projects. CVera, MERIDIAN and LearnToPoker each have highlights and eight detailed sections in all four site languages, covering features, architecture, interaction, accessibility and limitations. LearnToPoker retains a prominent warning about gambling and explains that the application uses virtual chips without real-money play. MediMind AI uses its updated dark-theme home screenshot.
+The portfolio currently lists 15 projects. CVera, MERIDIAN and LearnToPoker each have highlights and eight detailed sections in all four site languages, covering features, architecture, interaction, accessibility and limitations. LearnToPoker retains a prominent warning about gambling and explains that the application uses virtual chips without real-money play. StokTakip has highlights and eight detailed sections in all four languages, covering an overview, stock and orders, reports, roles and security, the audit log, architecture, tests and limitations. MediMind AI uses its updated dark-theme home screenshot.
 
 ### Local admin panel
 

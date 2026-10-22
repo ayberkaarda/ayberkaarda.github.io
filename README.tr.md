@@ -33,7 +33,7 @@ Herkese açık site ekran görüntüleri, 16 Ekim 2026 tarihinde güncel üretim
 
 ![CVera detay bölümleri; öne çıkanlar, genel bakış ve CV analizi özellikleri](docs/screenshots/project-sections.png)
 
-Portfolyoda şu anda 14 proje listelenir. CVera, MERIDIAN ve LearnToPoker için sitenin dört dilinde öne çıkanlar ve sekizer ayrıntılı bölüm bulunur; özellikler, mimari, etkileşim, erişilebilirlik ve sınırlar açıklanır. LearnToPoker sayfasında büyük kumar uyarısı korunur ve uygulamanın gerçek para içermeyen sanal fişlerle çalıştığı belirtilir. MediMind AI görseli yenilenen koyu tema ana ekranını gösterir.
+Portfolyoda şu anda 15 proje listelenir. CVera, MERIDIAN ve LearnToPoker için sitenin dört dilinde öne çıkanlar ve sekizer ayrıntılı bölüm bulunur; özellikler, mimari, etkileşim, erişilebilirlik ve sınırlar açıklanır. LearnToPoker sayfasında büyük kumar uyarısı korunur ve uygulamanın gerçek para içermeyen sanal fişlerle çalıştığı belirtilir. StokTakip için dört dilde öne çıkanlar ve sekiz ayrıntılı bölüm bulunur; genel bakış, stok ve sipariş, raporlar, roller ve güvenlik, denetim kaydı, mimari, testler ve sınırlar açıklanır. MediMind AI görseli yenilenen koyu tema ana ekranını gösterir.
 
 ### Yerel yönetim paneli
 

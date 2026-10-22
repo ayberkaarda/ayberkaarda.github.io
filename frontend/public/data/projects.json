@@ -3765,6 +3765,405 @@
             }
         },
         {
+            "slug": "stoktakip",
+            "featured": true,
+            "year": 2026,
+            "wip": false,
+            "image": "/projects/stoktakip.png",
+            "stack": [
+                ".NET 10",
+                "C#",
+                "WinForms",
+                "EF Core 10",
+                "SQL Server",
+                "xUnit"
+            ],
+            "repoUrl": "https://github.com/ayberkaarda/StokTakipApp",
+            "extraRepoUrls": [],
+            "texts": {
+                "tr": {
+                    "name": "StokTakip",
+                    "summary": "Rol yönetimi ve denetim kaydı olan masaüstü stok ve sipariş takibi",
+                    "description": "StokTakip, küçük ve orta ölçekli işletmeler için ürünleri, stok seviyelerini ve siparişleri SQL Server üzerinde takip eden bir Windows Forms uygulamasıdır. .NET Framework 4.8’den .NET 10’a taşınarak Domain, Application, Data ve UI katmanlarına ayrıldı; veri erişimi EF Core 10 ile, arayüz MVP deseniyle kuruldu. Yönetici ve Operatör rolleriyle giriş, ürün bazında düşük stok eşiği, raporlar, CSV dışa aktarım ve değiştirilemeyen denetim kaydı 1.000’i aşkın otomatik testle doğrulanır.",
+                    "highlights": [
+                        "Siparişte tek işlemde stok düşümü; silinen sipariş stoğa geri döner",
+                        "Her işlemde yeniden doğrulanan roller, PBKDF2 parola ve giriş kilidi",
+                        "Değiştirilemeyen denetim kaydı, CSV dışa aktarım ve CI’da 1.000’i aşkın test"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Genel bakış",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "StokTakip, büyük bir ERP sistemine ihtiyaç duymadan ürünlerini, stoklarını ve siparişlerini takip etmek isteyen küçük ve orta ölçekli işletmeler için geliştirilmiş bir Windows masaüstü uygulamasıdır. Kullanıcılar giriş yaptıktan sonra ürün ekler, stok günceller, stoğu otomatik düşen siparişler oluşturur, sipariş geçmişini filtreleyip sayfalar ve satış raporları alır. Yöneticiler ayrıca kategorileri ve kullanıcıları yönetir, sipariş siler, verileri CSV olarak dışa aktarır ve değiştirilemeyen denetim kaydını inceler. Proje .NET Framework 4.8 ile başladı ve katmanlı bir mimariyle .NET 10 üzerinde yeniden kuruldu; arayüz Türkçedir."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Ürün, stok ve sipariş",
+                            "blocks": [
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Ürün eklenebilir, adı değiştirilebilir, kategoriye atanabilir ve stoğu güncellenebilir; siparişi olan ürün silinemez.",
+                                        "Her ürünün kendi düşük stok eşiği vardır (varsayılan 10). Stok eşikte ya da altındaysa “Düşük”, sıfırsa ya da eşiğin yarısına indiyse “Kritik” olarak renklendirilir; ana pencere ilgilenilmesi gereken ürün sayısını gösterir.",
+                                        "Sipariş oluşturmak stoğu tek bir veritabanı işlemi içinde düşürür; stok yetersizse sipariş reddedilir.",
+                                        "Sipariş silme yumuşak silmedir ve adet stoğa geri eklenir; açık pencereler kendiliğinden yenilenir."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Sipariş geçmişi ve raporlar",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Sipariş geçmişi 25, 50 veya 100 kayıtlık sayfalama, tarih aralığı filtresi, ürün adına göre arama ve toplam sipariş ile adet özeti sunar; yeni bir sorgu öncekini iptal eder. Raporlar en çok satan ürünleri, günlük ve aylık sipariş özetlerini çubuk grafikle gösterir; tarih aralığı beş yılla sınırlıdır. Yöneticiler sipariş geçmişini ve denetim kaydını doğrudan Excel’de açılan CSV dosyalarına aktarabilir. Formül olarak yorumlanabilecek hücreler kaçışlanır ve dosya önce geçici bir dosyaya yazıldığı için mevcut bir çıktı yarım kalmaz."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Kullanıcılar, roller ve güvenlik",
+                            "blocks": [
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Yönetici ve Operatör rolleri tek bir yetki matrisinde tanımlanır ve yalnızca buton gizlenerek değil, servis katmanında da uygulanır.",
+                                        "Her işlemde kullanıcının güncel kaydı veritabanından yeniden okunur; pasifleştirilen ya da yetkisi düşürülen hesap bir sonraki işleminde erişimini kaybeder.",
+                                        "Parolalar kullanıcıya özel tuz ve en az 600.000 iterasyonla PBKDF2-HMAC-SHA256 olarak saklanır, sabit sürede karşılaştırılır ve iterasyon sayısı artırılırsa bir sonraki girişte otomatik güncellenir.",
+                                        "Art arda 5 hatalı giriş hesabı 15 dakika kilitler; giriş ekranı var olmayan, yanlış parolalı ve kilitli hesaplar için aynı mesajı aynı sürede verir.",
+                                        "Varsayılan parola yoktur: ilk yönetici hesabı ilk kurulum ekranında oluşturulur."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Denetim kaydı",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Ürün, stok, sipariş, kategori, eşik, kullanıcı, oturum ve dışa aktarım işlemleri; kimin, ne zaman yaptığı, eski ve yeni değer ve aradaki farkla birlikte kaydedilir. Kayıt, işlemle aynı veritabanı işlemi içinde yazılır; zaman damgası veritabanı sunucusundan alınır ve uygulama denetim kayıtlarının güncellenmesini ya da silinmesini reddeder. Yöneticiler kaydı kullanıcıya, işleme, varlığa ve tarihe göre filtreleyebilir, sayfalayabilir ve dışa aktarabilir."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Mimari",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Çözüm Domain, Application, Data ve UI projelerine ayrılır. İş kuralları domain varlıklarında ve uygulama servislerinde bulunur; SQL Server erişimi Entity Framework Core 10 depoları ve Unit of Work ile, yalnızca parametreli sorgularla yapılır. WinForms arayüzü Model-View-Presenter desenini izler: formlar pasif görünümlerdir, iş akışı presenter’larda tutulur ve her işlem ayrı bir DbContext ile kendi bağımlılık enjeksiyonu kapsamında çalışır. RowVersion sütunları eşzamanlı değişiklikleri yakalar; ikinci kayıt reddedilir ve liste yenilenir. Günlükler Serilog ile, kullanıcı girdisi temizlenerek yazılır; ham veritabanı hataları kullanıcıya gösterilmez."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Testler ve dağıtım",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Çözümde xUnit ve NSubstitute ile yazılmış birim testleri, tam yetki matrisi dahil bellek içi SQLite üzerinde entegrasyon testleri ve presenter testlerinden oluşan 1.000’i aşkın otomatik test bulunur. İsteğe bağlı SQL Server testleri geçici bir veritabanı oluşturup gerçek migration’ları uygular; eşzamanlılık yarışlarını, Türkçe arama ve sıralamayı ve kısıtları sınar. GitHub Actions uyarıları hata sayarak derler, testleri çalıştırır, güvenlik açığı bulunan paketleri ve bekleyen model değişikliklerini denetler; sürüm etiketlerinde .NET kurulumu gerektirmeyen tek dosyalık bir win-x64 paketi yayınlar. Kalan riskler yazılı bir tehdit modelinde belgelenmiştir."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Sınırlamalar",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Roller yalnızca uygulama içinde geçerlidir: SQL Server’a doğrudan yazma yetkisi olan bir Windows hesabı bunları atlayabilir, bu yüzden canlı ortamda veritabanı yetkileri ayrılmalıdır. Sipariş tarihleri ve giriş kilidi süresi istemci saatine göre hesaplanır, oturum zaman aşımı yoktur ve yönetici başka bir kullanıcının parolasını sıfırlayamaz."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "en": {
+                    "name": "StokTakip",
+                    "summary": "Desktop inventory and order tracking with roles and an audit log",
+                    "description": "StokTakip is a Windows Forms application for small and medium-sized businesses that tracks products, stock levels and orders in SQL Server. It was rebuilt from .NET Framework 4.8 on .NET 10 with a layered Domain, Application, Data and UI structure, EF Core 10 and the MVP pattern. Sign-in with Admin and Operator roles, per-product low-stock thresholds, reports, CSV export and an append-only audit log are covered by more than 1,000 automated tests.",
+                    "highlights": [
+                        "Stock deducted per order in one transaction, with soft delete and stock return",
+                        "Roles checked on every operation, PBKDF2 passwords and sign-in lockout",
+                        "Append-only audit log, CSV export and more than 1,000 tests in CI"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Overview",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "StokTakip is a Windows desktop application for small and medium-sized businesses that want to keep track of products, stock and orders without a full ERP system. After signing in, users add products, adjust stock, place orders that deduct stock automatically, filter and page through the order history and run sales reports. Admins also manage categories and users, delete orders, export data to CSV and review an audit log that cannot be altered. The project started on .NET Framework 4.8 and was rebuilt on .NET 10 with a layered architecture; the interface is in Turkish."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Products, stock and orders",
+                            "blocks": [
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Products can be added, renamed, assigned to a category and have their stock updated; a product that has orders cannot be deleted.",
+                                        "Every product has its own low-stock threshold (10 by default). Stock at or below the threshold is marked Low, and stock at zero or at half the threshold is marked Critical; the main window shows how many products need attention.",
+                                        "Creating an order deducts stock inside a single database transaction, and the order is rejected when stock is insufficient.",
+                                        "Deleting an order is a soft delete that returns the quantity to stock, and open windows refresh on their own."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Order history and reports",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The order history offers paging with 25, 50 or 100 rows, a date range filter, search by product name and a summary of total orders and quantity; a new query cancels the previous one. Reports show the best-selling products and daily and monthly order summaries with a bar chart, with the date range limited to five years. Admins can export the order history and the audit log to CSV files that open directly in Excel. Cells that could be read as formulas are escaped, and each file is first written to a temporary file, so an existing export is never left half-written."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Users, roles and security",
+                            "blocks": [
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "The Admin and Operator roles are defined in a single permission matrix and enforced in the service layer, not only by hiding buttons.",
+                                        "Every operation re-reads the user’s current record from the database, so a deactivated or demoted account loses access on its next action.",
+                                        "Passwords are stored with PBKDF2-HMAC-SHA256, a salt per user and at least 600,000 iterations, compared in constant time and upgraded automatically at the next sign-in if the iteration count is raised.",
+                                        "Five failed sign-ins in a row lock an account for 15 minutes; the sign-in screen gives the same message, in the same time, for unknown, wrong-password and locked accounts.",
+                                        "There is no default password: the first admin account is created on an initial setup screen."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Audit log",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Product, stock, order, category, threshold, user, session and export actions are recorded with who did them and when, the old and new values and the difference. Each record is written in the same database transaction as the action, the timestamp comes from the database server, and the application rejects any update or deletion of audit records. Admins can filter the log by user, action, entity and date, page through it and export it."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Architecture",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The solution is split into Domain, Application, Data and UI projects. Business rules live in the domain entities and application services, while Entity Framework Core 10 repositories and a Unit of Work handle SQL Server access with parameterised queries only. The WinForms interface follows Model-View-Presenter: forms are passive views, the workflow lives in presenters, and every operation runs in its own dependency injection scope with a separate DbContext. RowVersion columns catch concurrent edits; the second save is rejected and the list is refreshed. Logging uses Serilog with user input sanitised, and raw database errors are never shown to the user."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Tests and delivery",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "The solution has more than 1,000 automated tests: unit tests with xUnit and NSubstitute, integration tests on in-memory SQLite that include the full permission matrix, and presenter tests. Optional SQL Server tests create a temporary database, apply the real migrations and cover concurrency races, Turkish search and sorting, and constraints. GitHub Actions builds with warnings treated as errors, runs the tests, checks for vulnerable packages and pending model changes, and on version tags publishes a self-contained single-file win-x64 package that needs no .NET installation. The remaining risks are documented in a written threat model."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Limitations",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Roles apply inside the application only: a Windows account with direct write access to SQL Server could bypass them, so a production setup needs separate database permissions. Order dates and the lockout period are calculated from the client clock, there is no session timeout, and an admin cannot reset another user’s password."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "fr": {
+                    "name": "StokTakip",
+                    "summary": "Suivi de stock et de commandes sur poste de travail, avec rôles et journal d’audit",
+                    "description": "StokTakip est une application Windows Forms destinée aux petites et moyennes entreprises, qui suit les produits, les niveaux de stock et les commandes dans SQL Server. Elle a été reconstruite de .NET Framework 4.8 vers .NET 10, avec une architecture en couches Domain, Application, Data et UI, EF Core 10 et le modèle MVP. La connexion avec rôles Administrateur et Opérateur, les seuils de stock bas par produit, les rapports, l’export CSV et un journal d’audit non modifiable sont couverts par plus de 1 000 tests automatisés.",
+                    "highlights": [
+                        "Stock déduit à chaque commande en une seule transaction, suppression logique et remise en stock",
+                        "Rôles vérifiés à chaque opération, mots de passe PBKDF2 et verrouillage de connexion",
+                        "Journal d’audit en ajout seul, export CSV et plus de 1 000 tests en CI"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Vue d’ensemble",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "StokTakip est une application de bureau Windows pour les petites et moyennes entreprises qui veulent suivre leurs produits, leur stock et leurs commandes sans recourir à un ERP complet. Après connexion, l’utilisateur ajoute des produits, ajuste le stock, passe des commandes qui déduisent le stock automatiquement, filtre et parcourt l’historique des commandes et consulte des rapports de ventes. L’administrateur gère en plus les catégories et les utilisateurs, supprime des commandes, exporte les données en CSV et consulte un journal d’audit non modifiable. Le projet a commencé sous .NET Framework 4.8 et a été reconstruit sous .NET 10 avec une architecture en couches ; l’interface est en turc."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Produits, stock et commandes",
+                            "blocks": [
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Un produit peut être ajouté, renommé, rattaché à une catégorie et voir son stock mis à jour ; un produit qui a des commandes ne peut pas être supprimé.",
+                                        "Chaque produit a son propre seuil de stock bas (10 par défaut). Un stock égal ou inférieur au seuil est marqué Bas, un stock nul ou à la moitié du seuil est marqué Critique ; la fenêtre principale indique combien de produits demandent une action.",
+                                        "La création d’une commande déduit le stock dans une seule transaction de base de données, et la commande est refusée si le stock est insuffisant.",
+                                        "La suppression d’une commande est logique et remet la quantité en stock ; les fenêtres ouvertes se mettent à jour d’elles-mêmes."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Historique des commandes et rapports",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "L’historique propose une pagination de 25, 50 ou 100 lignes, un filtre par période, une recherche par nom de produit et un récapitulatif du nombre de commandes et des quantités ; une nouvelle requête annule la précédente. Les rapports présentent les produits les plus vendus ainsi que des récapitulatifs quotidiens et mensuels avec un graphique en barres, sur une période limitée à cinq ans. L’administrateur peut exporter l’historique et le journal d’audit dans des fichiers CSV qui s’ouvrent directement dans Excel. Les cellules susceptibles d’être lues comme des formules sont échappées, et chaque fichier est d’abord écrit dans un fichier temporaire : un export existant n’est jamais laissé à moitié écrit."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Utilisateurs, rôles et sécurité",
+                            "blocks": [
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Les rôles Administrateur et Opérateur sont définis dans une matrice de droits unique et appliqués dans la couche de services, pas seulement en masquant des boutons.",
+                                        "Chaque opération relit l’enregistrement actuel de l’utilisateur en base : un compte désactivé ou rétrogradé perd ses droits dès l’action suivante.",
+                                        "Les mots de passe sont stockés avec PBKDF2-HMAC-SHA256, un sel par utilisateur et au moins 600 000 itérations, comparés en temps constant et mis à niveau automatiquement à la connexion suivante si le nombre d’itérations augmente.",
+                                        "Cinq échecs de connexion consécutifs verrouillent le compte pendant 15 minutes ; l’écran de connexion renvoie le même message, dans le même délai, pour un compte inconnu, un mauvais mot de passe ou un compte verrouillé.",
+                                        "Il n’y a pas de mot de passe par défaut : le premier compte administrateur est créé sur un écran de configuration initiale."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Journal d’audit",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Les actions sur les produits, le stock, les commandes, les catégories, les seuils, les utilisateurs, les sessions et les exports sont enregistrées avec leur auteur, leur date, les anciennes et nouvelles valeurs et l’écart. Chaque entrée est écrite dans la même transaction que l’action, l’horodatage provient du serveur de base de données, et l’application refuse toute modification ou suppression d’une entrée. L’administrateur peut filtrer le journal par utilisateur, action, entité et date, le paginer et l’exporter."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Architecture",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "La solution est découpée en projets Domain, Application, Data et UI. Les règles métier se trouvent dans les entités du domaine et les services applicatifs, tandis que des dépôts Entity Framework Core 10 et une Unit of Work assurent l’accès à SQL Server uniquement par requêtes paramétrées. L’interface WinForms suit le modèle Modèle-Vue-Présentateur : les formulaires sont des vues passives, la logique se trouve dans les présentateurs et chaque opération s’exécute dans sa propre portée d’injection de dépendances avec un DbContext distinct. Des colonnes RowVersion détectent les modifications concurrentes : le second enregistrement est refusé et la liste est rechargée. La journalisation passe par Serilog avec nettoyage des saisies, et les erreurs brutes de la base ne sont jamais montrées à l’utilisateur."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Tests et livraison",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "La solution compte plus de 1 000 tests automatisés : tests unitaires avec xUnit et NSubstitute, tests d’intégration sur SQLite en mémoire couvrant toute la matrice de droits, et tests des présentateurs. Des tests SQL Server facultatifs créent une base temporaire, appliquent les vraies migrations et couvrent les accès concurrents, la recherche et le tri en turc ainsi que les contraintes. GitHub Actions compile en traitant les avertissements comme des erreurs, lance les tests, vérifie les paquets vulnérables et les changements de modèle non migrés, puis publie sur les tags de version un paquet win-x64 autonome en un seul fichier, sans installation de .NET. Les risques restants sont documentés dans un modèle de menaces."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Limites",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Les rôles ne s’appliquent qu’à l’intérieur de l’application : un compte Windows disposant d’un accès direct en écriture à SQL Server pourrait les contourner, une installation en production exige donc des droits de base de données séparés. Les dates de commande et la durée de verrouillage reposent sur l’horloge du poste client, il n’y a pas d’expiration de session et un administrateur ne peut pas réinitialiser le mot de passe d’un autre utilisateur."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "de": {
+                    "name": "StokTakip",
+                    "summary": "Desktop-Lager- und Auftragsverwaltung mit Rollen und Audit-Protokoll",
+                    "description": "StokTakip ist eine Windows-Forms-Anwendung für kleine und mittlere Unternehmen, die Produkte, Lagerbestände und Aufträge in SQL Server verwaltet. Sie wurde von .NET Framework 4.8 auf .NET 10 neu aufgebaut, mit einer Schichtenarchitektur aus Domain, Application, Data und UI, EF Core 10 und dem MVP-Muster. Die Anmeldung mit den Rollen Administrator und Operator, Mindestbestände pro Produkt, Berichte, CSV-Export und ein unveränderliches Audit-Protokoll sind durch mehr als 1.000 automatisierte Tests abgesichert.",
+                    "highlights": [
+                        "Bestandsabbuchung pro Auftrag in einer Transaktion, mit Soft Delete und Rückbuchung",
+                        "Rollen bei jeder Operation geprüft, PBKDF2-Passwörter und Anmeldesperre",
+                        "Nur anhängbares Audit-Protokoll, CSV-Export und mehr als 1.000 Tests in der CI"
+                    ],
+                    "sections": [
+                        {
+                            "heading": "Überblick",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "StokTakip ist eine Windows-Desktop-Anwendung für kleine und mittlere Unternehmen, die Produkte, Bestände und Aufträge verwalten möchten, ohne ein vollständiges ERP-System einzusetzen. Nach der Anmeldung legen Nutzer Produkte an, passen Bestände an, erfassen Aufträge, die den Bestand automatisch abbuchen, filtern und blättern durch die Auftragshistorie und rufen Verkaufsberichte ab. Administratoren verwalten zusätzlich Kategorien und Benutzer, löschen Aufträge, exportieren Daten als CSV und sehen ein Audit-Protokoll ein, das sich nicht verändern lässt. Das Projekt begann unter .NET Framework 4.8 und wurde mit einer Schichtenarchitektur unter .NET 10 neu aufgebaut; die Oberfläche ist auf Türkisch."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Produkte, Bestand und Aufträge",
+                            "blocks": [
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Produkte lassen sich anlegen, umbenennen, einer Kategorie zuordnen und im Bestand anpassen; ein Produkt mit Aufträgen kann nicht gelöscht werden.",
+                                        "Jedes Produkt hat einen eigenen Mindestbestand (standardmäßig 10). Ein Bestand auf oder unter diesem Wert wird als Niedrig markiert, ein Bestand von null oder höchstens der Hälfte als Kritisch; das Hauptfenster zeigt, wie viele Produkte Aufmerksamkeit brauchen.",
+                                        "Ein neuer Auftrag bucht den Bestand innerhalb einer einzigen Datenbanktransaktion ab und wird abgelehnt, wenn der Bestand nicht reicht.",
+                                        "Das Löschen eines Auftrags ist ein Soft Delete, das die Menge in den Bestand zurückbucht; geöffnete Fenster aktualisieren sich selbst."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Auftragshistorie und Berichte",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Die Auftragshistorie bietet Seiten mit 25, 50 oder 100 Zeilen, einen Datumsfilter, die Suche nach Produktnamen und eine Zusammenfassung von Auftragszahl und Menge; eine neue Abfrage bricht die vorherige ab. Berichte zeigen die meistverkauften Produkte sowie tägliche und monatliche Auftragsübersichten mit Balkendiagramm, bei einem Zeitraum von höchstens fünf Jahren. Administratoren können die Auftragshistorie und das Audit-Protokoll als CSV-Dateien exportieren, die sich direkt in Excel öffnen. Zellen, die als Formel gelesen werden könnten, werden maskiert, und jede Datei wird zunächst in eine temporäre Datei geschrieben, sodass ein vorhandener Export nie halb geschrieben zurückbleibt."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Benutzer, Rollen und Sicherheit",
+                            "blocks": [
+                                {
+                                    "type": "ul",
+                                    "items": [
+                                        "Die Rollen Administrator und Operator sind in einer einzigen Berechtigungsmatrix festgelegt und werden in der Serviceschicht durchgesetzt, nicht nur durch ausgeblendete Schaltflächen.",
+                                        "Jede Operation liest den aktuellen Benutzerdatensatz erneut aus der Datenbank; ein deaktiviertes oder herabgestuftes Konto verliert seine Rechte bei der nächsten Aktion.",
+                                        "Passwörter werden mit PBKDF2-HMAC-SHA256, einem Salt pro Benutzer und mindestens 600.000 Iterationen gespeichert, in konstanter Zeit verglichen und bei der nächsten Anmeldung automatisch aktualisiert, wenn die Iterationszahl steigt.",
+                                        "Fünf fehlgeschlagene Anmeldungen in Folge sperren ein Konto für 15 Minuten; der Anmeldebildschirm liefert für unbekannte Konten, falsche Passwörter und gesperrte Konten dieselbe Meldung in derselben Zeit.",
+                                        "Es gibt kein Standardpasswort: Das erste Administratorkonto wird auf einem Einrichtungsbildschirm angelegt."
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Audit-Protokoll",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Aktionen an Produkten, Beständen, Aufträgen, Kategorien, Mindestbeständen, Benutzern, Sitzungen und Exporten werden mit Urheber, Zeitpunkt, altem und neuem Wert sowie der Differenz protokolliert. Jeder Eintrag wird in derselben Datenbanktransaktion wie die Aktion geschrieben, der Zeitstempel stammt vom Datenbankserver, und die Anwendung lehnt jede Änderung oder Löschung von Einträgen ab. Administratoren können das Protokoll nach Benutzer, Aktion, Objekt und Datum filtern, durchblättern und exportieren."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Architektur",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Die Lösung ist in die Projekte Domain, Application, Data und UI aufgeteilt. Die Geschäftsregeln liegen in den Domänenentitäten und Anwendungsservices; Entity Framework Core 10 Repositories und eine Unit of Work greifen ausschließlich mit parametrisierten Abfragen auf SQL Server zu. Die WinForms-Oberfläche folgt dem Model-View-Presenter-Muster: Formulare sind passive Ansichten, der Ablauf liegt in den Presentern, und jede Operation läuft in einem eigenen Dependency-Injection-Scope mit separatem DbContext. RowVersion-Spalten erkennen gleichzeitige Änderungen; die zweite Speicherung wird abgelehnt und die Liste neu geladen. Protokolliert wird mit Serilog bei bereinigten Benutzereingaben, und rohe Datenbankfehler werden den Nutzern nie angezeigt."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Tests und Auslieferung",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Die Lösung umfasst mehr als 1.000 automatisierte Tests: Unit-Tests mit xUnit und NSubstitute, Integrationstests auf In-Memory-SQLite einschließlich der vollständigen Berechtigungsmatrix sowie Presenter-Tests. Optionale SQL-Server-Tests legen eine temporäre Datenbank an, wenden die echten Migrationen an und prüfen gleichzeitige Zugriffe, türkische Suche und Sortierung sowie Constraints. GitHub Actions baut mit Warnungen als Fehler, führt die Tests aus, prüft auf verwundbare Pakete und nicht migrierte Modelländerungen und veröffentlicht bei Versions-Tags ein eigenständiges win-x64-Paket als Einzeldatei, das keine .NET-Installation braucht. Die verbleibenden Risiken sind in einem schriftlichen Bedrohungsmodell dokumentiert."
+                                }
+                            ]
+                        },
+                        {
+                            "heading": "Einschränkungen",
+                            "blocks": [
+                                {
+                                    "type": "p",
+                                    "text": "Die Rollen gelten nur innerhalb der Anwendung: Ein Windows-Konto mit direktem Schreibzugriff auf SQL Server könnte sie umgehen, daher braucht ein Produktivbetrieb getrennte Datenbankrechte. Auftragsdaten und die Sperrdauer werden nach der Uhr des Client-Rechners berechnet, es gibt kein Sitzungs-Timeout, und ein Administrator kann das Passwort eines anderen Benutzers nicht zurücksetzen."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        {
             "slug": "educore",
             "featured": false,
             "year": 2026,
