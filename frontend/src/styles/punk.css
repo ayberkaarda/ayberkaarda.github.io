@@ -31,6 +31,14 @@
     -0.025em -0.02em 0 color-mix(in srgb, var(--punk-red) 85%, transparent);
 }
 
+/* Red text sits on the grain, which lightens the black; it takes the lighter red. :where() keeps
+   the base specificity, so card, nav and button colours still win. Links on paper (.pp-original
+   in .pp-shot) keep the deeper --band-accent from their own scope. */
+:where(:root[data-theme='punk']) a:hover,
+:where(:root[data-theme='punk']) :is(.pp-h2, .pp-back:hover, .btn--ghost:hover, .m-menu__link.active) {
+  color: var(--punk-red-text);
+}
+
 :root[data-theme='punk'] .contact-email {
   text-decoration-color: var(--accent);
   text-decoration-thickness: 0.08em;
@@ -118,7 +126,7 @@
 :root[data-theme='punk'] .ransom__ch[data-cut='4'] {
   --rot: 4deg;
   --boil: 0.58s;
-  background: var(--punk-blue);
+  background: var(--punk-blue-ink);
   color: var(--paper);
 }
 
@@ -132,14 +140,22 @@
   rotate: var(--rot);
 }
 
-:root[data-theme='punk'] .section-num {
+/* Section stickers: one size and weight in every section (h2 or p), held still; only the
+   name boils. The ID in :is() outranks the #experience rules in sections.css. */
+:root[data-theme='punk'] :is(#projects, #experience, #skills, #contact, .section) .section-num {
   --rot: -1.5deg;
   width: fit-content;
-  padding: 0.35em 0.7em 0.3em;
+  padding: 0.3em 0.55em 0.25em;
   background: var(--accent);
   color: var(--on-accent);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  font-stretch: 75%;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
   rotate: var(--rot);
-  animation: punk-boil 0.66s steps(1, end) infinite;
 }
 
 /* On the paper band the sticker is the deeper red with paper text. */
@@ -171,6 +187,20 @@
 
 :root[data-theme='punk'] .site-nav a.active {
   box-shadow: 2px 2px 0 var(--punk-blue);
+}
+
+/* The print shadow above outranks :focus-visible; keep the focus ring on the active link. */
+:root[data-theme='punk'] .site-nav a.active:focus-visible {
+  box-shadow: var(--focus), 2px 2px 0 var(--punk-blue);
+}
+
+/* Square header capsule, nav links and language bubble; the motion switch keeps its round track. */
+:root[data-theme='punk'] .site-header {
+  --r-pill: 0;
+}
+
+:root[data-theme='punk'] .motion-switch__track {
+  --r-pill: 999px;
 }
 
 /* Technology ribbon: a strip of red tape across the page, wider than the hero so the
@@ -256,6 +286,40 @@
   pointer-events: none;
 }
 
+/* Card names: condensed and heavy, but no caps or print shadow so the hero name stays loudest. */
+:root[data-theme='punk'] .card-name {
+  font-stretch: 85%;
+  font-weight: 800;
+}
+
+/* Tape varies in position only, never colour or angle. */
+:root[data-theme='punk'] .projects-rest > .card:nth-child(3n + 1)::before {
+  left: 30%;
+}
+
+:root[data-theme='punk'] .projects-rest > .card:nth-child(3n + 2)::before {
+  left: 68%;
+}
+
+/* Fanned cards: name and number read as a caption on the paper while the cards are fanned;
+   summary and stack fade in as before. Opacity only, so the scene's measured boxes do not move. */
+@media (min-width: 960px) {
+  :root[data-theme='punk'] .scene-ready [data-fan-card] .card-body {
+    opacity: 1;
+  }
+
+  :root[data-theme='punk'] .scene-ready [data-fan-card] :is(.card-summary, .card-stack) {
+    opacity: clamp(0, (var(--p, 0) - 0.55) * 4, 1);
+  }
+}
+
+/* Reduced motion: the still stack gets the same paper cut-out look as the cards. */
+:root[data-theme='punk'] .hero-still-img {
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 6px 6px 0 var(--punk-blue);
+}
+
 /* Only the cards outside the hero scene are tilted; the scene measures the fan cards untransformed. */
 :root[data-theme='punk'] .projects-rest > .card:nth-child(odd) {
   rotate: -0.8deg;
@@ -281,6 +345,40 @@
   );
 }
 
+/* Company names follow the poster type, a step lighter than the section stickers. */
+:root[data-theme='punk'] .experience-body h3 {
+  font-stretch: 80%;
+  font-weight: 800;
+}
+
+/* ---------- Skills: group names as paper labels, lists unchanged ---------- */
+:root[data-theme='punk'] .skills-group h3 {
+  --rot: -1deg;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.25em 0.6em;
+  background: var(--paper);
+  color: var(--ink);
+  rotate: var(--rot);
+}
+
+:root[data-theme='punk'] .skills-group:nth-child(even) h3 {
+  --rot: 1deg;
+}
+
+/* ---------- Contact: one still marker arrow after the title ---------- */
+:root[data-theme='punk'] .contact-title::after {
+  content: '';
+  display: inline-block;
+  width: 0.55em;
+  height: 0.7em;
+  margin-left: 0.15em;
+  vertical-align: -0.1em;
+  background: var(--accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 50' fill='none' stroke='black' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 4c14 2 22 12 20 38'/%3E%3Cpath d='M15 34l11 10 9-12'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 50' fill='none' stroke='black' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 4c14 2 22 12 20 38'/%3E%3Cpath d='M15 34l11 10 9-12'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
 /* ---------- Project page ---------- */
 :root[data-theme='punk'] .pp-shot {
   --surface: var(--paper);
@@ -289,6 +387,25 @@
   position: relative;
   border: 2px solid var(--ink);
   box-shadow: 8px 8px 0 var(--punk-blue);
+}
+
+/* Prev/next links take the button's hard print shadow. */
+:root[data-theme='punk'] .pp-pager__link {
+  border: 2px solid var(--fg);
+  box-shadow: 4px 4px 0 var(--punk-blue);
+  transition:
+    box-shadow var(--t-fast) var(--ease-std),
+    border-color var(--t-fast) var(--ease-std),
+    color var(--t-fast) var(--ease-std);
+}
+
+:root[data-theme='punk'] .pp-pager__link:hover {
+  border-color: var(--fg);
+  box-shadow: 6px 6px 0 var(--punk-red);
+}
+
+:root[data-theme='punk'] .pp-pager__link:focus-visible {
+  box-shadow: var(--focus), 4px 4px 0 var(--punk-blue);
 }
 
 /* ---------- Motion ---------- */
